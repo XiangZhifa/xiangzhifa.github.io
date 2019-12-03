@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Jeffery的博客">
 <meta property="og:description" content="Centos7如何创建新用户，并授予root权限……">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-03T18:29:27.858Z">
+<meta property="og:updated_time" content="2019-12-03T18:33:13.443Z">
 <meta name="twitter:card" content="summary">
   
   
@@ -169,28 +169,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li><p>创建用户<br> <code>#adduser username</code></p>
-</li>
-<li><p>设置密码<br> <code>#passwd username</code></p>
-</li>
-<li><p>确定sudoers文件的位置<br> <code>whereis sudoers</code></p>
-<a id="more"></a></li>
-<li><p>查看文件权限<br> <code>ls -l /etc/sudoers</code></p>
-</li>
-<li><p>修改文件权限为可编辑<br> <code>chmod -v u+w /etc/sudoers</code></p>
-</li>
-<li><p>启用文件编辑器<br> <code>vim /etc/sudoers</code></p>
-</li>
-<li><p>在文件中root ALL=(ALL) ALL下一行添加<br> <code>username ALL=(ALL) ALL</code></p>
-</li>
-<li><p>将文件权限还原为只读<br> <code>chmod -v u-w /etc/sudoers</code></p>
-</li>
-<li><p>确认文件权限已经还原为只读<br> <code>ls -l /etc/sudoers</code></p>
-</li>
-<li><p>切换用户（如果需要的话）<br><code>su username</code></p>
-</li>
-</ol>
+        <p>1.创建用户<br>    <code>#adduser username</code></p>
+<p>2.设置密码<br>    <code>#passwd username</code></p>
+<p>3.确定sudoers文件的位置<br>    <code>whereis sudoers</code></p>
+<p>4.查看文件权限<br>    <code>ls -l /etc/sudoers</code></p>
+<p>5.修改文件权限为可编辑<br>    <code>chmod -v u+w /etc/sudoers</code></p>
+<p>6.启用文件编辑器<br>    <code>vim /etc/sudoers</code></p>
+<p>7.在文件中root ALL=(ALL) ALL下一行添加<br>    <code>username ALL=(ALL) ALL</code></p>
+<p>8.将文件权限还原为只读<br>    <code>chmod -v u-w /etc/sudoers</code></p>
+<p>9.确认文件权限已经还原为只读<br>    <code>ls -l /etc/sudoers</code></p>
+<p>10.切换用户（如果需要的话）<br>    <code>su username</code></p>
 
       
 
