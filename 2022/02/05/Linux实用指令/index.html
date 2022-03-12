@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux系统运行级别0 关机 1 单用户（找回丢失密码） 2 多用户 无网络 3 多用户 有网络 4 保留级别（暂未启用） 5 图形界面 6 重启 指定Linux系统运行级别的配置文件 &#x2F;etc&#x2F;inittab 中 id:5:initdefault: 修改文件可以更改运行级别 (常用的运行级别是 3 和 5) 切换Linux运行级别1init 运行级别数字(0~6)  找回root密码思路: 进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux实用指令">
+<meta property="og:url" content="https://xiangzhifa.github.io/2022/02/05/Linux%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Blog">
+<meta property="og:description" content="Linux系统运行级别0 关机 1 单用户（找回丢失密码） 2 多用户 无网络 3 多用户 有网络 4 保留级别（暂未启用） 5 图形界面 6 重启 指定Linux系统运行级别的配置文件 &#x2F;etc&#x2F;inittab 中 id:5:initdefault: 修改文件可以更改运行级别 (常用的运行级别是 3 和 5) 切换Linux运行级别1init 运行级别数字(0~6)  找回root密码思路: 进">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-02-05T02:49:40.412Z">
+<meta property="article:modified_time" content="2022-02-08T09:01:01.832Z">
+<meta property="article:author" content="Jeffery Xiang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xiangzhifa.github.io/2022/02/05/Linux实用指令/"/>
+
+
+
+
+
+  <title>Linux实用指令 | Jeffery's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jeffery's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/02/05/Linux%E5%AE%9E%E7%94%A8%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux实用指令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-05T10:49:40+08:00">
+                2022-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Linux系统运行级别"><a href="#Linux系统运行级别" class="headerlink" title="Linux系统运行级别"></a>Linux系统运行级别</h3><p>0 关机</p>
+<p>1 单用户（找回丢失密码）</p>
+<p>2 多用户 无网络</p>
+<p>3 多用户 有网络</p>
+<p>4 保留级别（暂未启用）</p>
+<p>5 图形界面</p>
+<p>6 重启</p>
+<p>指定Linux系统运行级别的配置文件 /etc/inittab 中 id:5:initdefault:</p>
+<p>修改文件可以更改运行级别</p>
+<p>(常用的运行级别是 3 和 5)</p>
+<h3 id="切换Linux运行级别"><a href="#切换Linux运行级别" class="headerlink" title="切换Linux运行级别"></a>切换Linux运行级别</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 运行级别数字(0~6)</span><br></pre></td></tr></table></figure>
+
+<h3 id="找回root密码"><a href="#找回root密码" class="headerlink" title="找回root密码"></a>找回root密码</h3><p>思路: 进入单用户模式（该模式root不需要密码），然后修改密码，在切换回多用户模式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在开机读秒引导时 按回车键</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入到一个新界面 输入 e</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 选中新界面第二行 输入 e</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在选中行的最后加上 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 再次 按回车键 并 输入 b</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入单用户模式 用 passwd 命令改 root 密码</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> tip!!! 以上步骤需要实体机操作，不能远程操作</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux帮助指令"><a href="#Linux帮助指令" class="headerlink" title="Linux帮助指令"></a>Linux帮助指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">man 命令名称</span><br><span class="line"></span><br><span class="line">help 命令名称</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux文件目录类指令"><a href="#Linux文件目录类指令" class="headerlink" title="Linux文件目录类指令"></a>Linux文件目录类指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示当前工作目录的绝对路径</span></span><br><span class="line">pwd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示当前目录所有内容信息</span></span><br><span class="line">ls</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示当前目录所有内容信息（包括隐藏内容）</span></span><br><span class="line">ls -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 以列表方式 显示当前目录所有内容信息</span></span><br><span class="line">ls -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换目录</span></span><br><span class="line">cd </span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换到家目录</span></span><br><span class="line">cd ~</span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换到上级目录</span></span><br><span class="line">cd ..</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建目录</span></span><br><span class="line">mkdir 指令 目录名称</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建多级目录</span></span><br><span class="line">mkdir -p 目录名称</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除目录</span></span><br><span class="line">rmdir 指令 要删除的空目录名称</span><br><span class="line"><span class="meta">#</span><span class="bash"> tip!!! 如果目录下有内容 rmdir 无法删除</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-touch指令"><a href="#Linux-touch指令" class="headerlink" title="Linux touch指令"></a>Linux touch指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建一个空文件</span></span><br><span class="line">touch 文件名称</span><br><span class="line"><span class="meta">#</span><span class="bash"> !!!tip 可以跟多个文件名 一次创建多个文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-cp指令"><a href="#Linux-cp指令" class="headerlink" title="Linux cp指令"></a>Linux cp指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 拷贝文件</span></span><br><span class="line">cp [选项] source dest</span><br><span class="line"><span class="meta">#</span><span class="bash"> 递归复制整个文件夹</span></span><br><span class="line">cp -r source dest</span><br><span class="line"><span class="meta">#</span><span class="bash"> !!!tip 当目标目录下有相同文件 会提示是否要覆盖 可以强制覆盖（如下）</span></span><br><span class="line">\cp -r source dest</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-rm指令"><a href="#Linux-rm指令" class="headerlink" title="Linux rm指令"></a>Linux rm指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除文件或目录</span></span><br><span class="line">rm [选项] 文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 递归删除整个文件夹</span></span><br><span class="line">rm -r 文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 强制删除 不提示</span></span><br><span class="line">rm -f 文件或目录</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-mv指令"><a href="#Linux-mv指令" class="headerlink" title="Linux mv指令"></a>Linux mv指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 移动文件或目录、重命名</span></span><br><span class="line">mv 旧文件名 新文件名</span><br><span class="line">mv sourcePath targetPath </span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-cat指令"><a href="#Linux-cat指令" class="headerlink" title="Linux cat指令"></a>Linux cat指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 浏览文件（!!!只能浏览 不可修改!!!）</span></span><br><span class="line">cat [选项] 要查看的文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 浏览文件时 显示行号</span></span><br><span class="line">cat -n 要查看的文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 分页显示</span></span><br><span class="line">cat -n 要查看的文件 | more</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-less指令"><a href="#Linux-less指令" class="headerlink" title="Linux less指令"></a>Linux less指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 该指令只会加载部分文件，速度较快</span></span><br><span class="line">less 要查看的文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="gt-和-gt-gt-重定向和追加"><a href="#gt-和-gt-gt-重定向和追加" class="headerlink" title="&gt; 和 &gt;&gt; (重定向和追加)"></a>&gt; 和 &gt;&gt; (重定向和追加)</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> &gt; 输出重定向 会覆盖原文件的内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将 ls -l 的内容，写入到test.txt，如果文件不存在，就创建该文件</span></span><br><span class="line">ls -l &gt; test.txt </span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt;&gt; 追加 不会覆盖原文件的内容 新内容直接追加在尾部</span></span><br><span class="line">ls -l &gt;&gt; test.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-echo指令"><a href="#Linux-echo指令" class="headerlink" title="Linux echo指令"></a>Linux echo指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo [选项] [输出内容]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-head指令"><a href="#Linux-head指令" class="headerlink" title="Linux head指令"></a>Linux head指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认查看文件前10行的内容</span></span><br><span class="line">head 文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看前5行</span></span><br><span class="line">head -n 文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-tail指令"><a href="#Linux-tail指令" class="headerlink" title="Linux tail指令"></a>Linux tail指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认查看文件后10行的内容</span></span><br><span class="line">tail 文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看后5行</span></span><br><span class="line">tail -n 文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 实时追踪文件更新</span></span><br><span class="line">tail -f 文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-ln指令-软链接"><a href="#Linux-ln指令-软链接" class="headerlink" title="Linux ln指令(软链接)"></a>Linux ln指令(软链接)</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s [目标文件路径] [软链接名称]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-history指令"><a href="#Linux-history指令" class="headerlink" title="Linux history指令"></a>Linux history指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看之前执行过的指令</span></span><br><span class="line">history </span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行对应编号的指令</span></span><br><span class="line">![编号]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-时间日期类指令"><a href="#Linux-时间日期类指令" class="headerlink" title="Linux 时间日期类指令"></a>Linux 时间日期类指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示当前日期</span></span><br><span class="line">date</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示当前年份</span></span><br><span class="line">date &quot;+%Y&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示当前月份</span></span><br><span class="line">date &quot;+%m&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示当前是哪一天</span></span><br><span class="line">date &quot;+%d&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示 年 月 日 时 分 秒</span></span><br><span class="line">date &quot;+%Y-%m-%d %H:%M:%S&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置系统时间</span></span><br><span class="line">date -s &quot;2022-02-08 22:22:22&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示日历</span></span><br><span class="line">cal</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-find指令"><a href="#Linux-find指令" class="headerlink" title="Linux find指令"></a>Linux find指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">find [搜索范围] [选项]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在指定目录下 按文件名查找</span></span><br><span class="line">find [目录路径] -name [文件名]</span><br><span class="line">find /root -name test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在指定目录下 按文件拥有者(用户名)查找</span></span><br><span class="line">find [目录路径] -user [用户名]</span><br><span class="line">find /root -user admin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在指定目录下 按文件大小进行查找</span></span><br><span class="line">find [目录路径] -size [文件大小]</span><br><span class="line"><span class="meta">#</span><span class="bash"> +20M:大于20M  -20M:小于20M  20M:等于20M</span></span><br><span class="line">find /root -size +20M</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-locate指令"><a href="#Linux-locate指令" class="headerlink" title="Linux locate指令"></a>Linux locate指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> locate指令可以快速定位文件路径</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 先更新locate数据库</span></span><br><span class="line">updatedb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 快速定位文件路径</span></span><br><span class="line">locate 文件名</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-grep指令-和-管道符"><a href="#Linux-grep指令-和-管道符" class="headerlink" title="Linux grep指令 和 管道符 |"></a>Linux grep指令 和 管道符 |</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> grep过滤查询</span></span><br><span class="line">grep [选项] 查找内容 源文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示查询结果的行号</span></span><br><span class="line">grep -n 查找内容 源文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 忽略大小写 进行查询</span></span><br><span class="line">grep -i 查找内容 源文件</span><br><span class="line"><span class="meta">#</span><span class="bash"> 管道符 | 将前一个命令的处理结果 传递给后一个命令进行处理</span></span><br><span class="line">cat test.txt | grep -ni hello</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-压缩-和-解压缩-指令"><a href="#Linux-压缩-和-解压缩-指令" class="headerlink" title="Linux 压缩 和 解压缩 指令"></a>Linux 压缩 和 解压缩 指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> gzip 压缩文件(将文件压缩成xxx.gz格式)</span></span><br><span class="line">gzip 文件名</span><br><span class="line"><span class="meta">#</span><span class="bash"> !!!tip 该指令不保留源文件！ 只保留压缩文件！</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> gunzip 解压文件</span></span><br><span class="line">gunzip 文件名.gz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> zip 压缩文件</span></span><br><span class="line">zip [选项] xxx.zip 要压缩的文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 递归压缩整个文件夹</span></span><br><span class="line">zip -r myHome.zip /home </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> unzip 解压文件</span></span><br><span class="line">unzip [选项] xxx.zip</span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压到指定目录</span></span><br><span class="line">unzip -d /root/test myHome.zip</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> tar指令(压缩/解压)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> tar指令压缩成xxx.tar.gz</span></span><br><span class="line">tar [选项] xxx.tar.gz 要压缩的文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 产生.tar打包文件 -c</span></span><br><span class="line">tar -c xxx.tar.gz 要压缩的文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示详细信息 -v</span></span><br><span class="line">tar -v xxx.tar.gz 要压缩的文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定压缩后的文件名 -f</span></span><br><span class="line">tar -f xxx.tar.gz 要压缩的文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打包的同时压缩 -z</span></span><br><span class="line">tar -z xxx.tar.gz 要压缩的文件或目录</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打包的同时压缩 -x</span></span><br><span class="line">tar -x xxx.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 压缩home文件夹</span></span><br><span class="line">tar -zcvf myHome.tar.gz /home</span><br><span class="line"><span class="meta">#</span><span class="bash"> tar指令解压</span></span><br><span class="line">tar -zxvf myHome.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> tar指令解压到指定目录(!!!指定的目录必须存在 否则会报错)</span></span><br><span class="line">tar -zxvf testFiles.tar.gz -C /root/test</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/02/04/Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/" rel="next" title="Linux用户管理">
+                <i class="fa fa-chevron-left"></i> Linux用户管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/08/Linux%E7%BB%84%E7%AE%A1%E7%90%86/" rel="prev" title="Linux组管理">
+                Linux组管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/RonaldoAvatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">Linux系统运行级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2Linux%E8%BF%90%E8%A1%8C%E7%BA%A7%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">切换Linux运行级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E5%9B%9Eroot%E5%AF%86%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">找回root密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%B8%AE%E5%8A%A9%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">Linux帮助指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">Linux文件目录类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-touch%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">Linux touch指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-cp%E6%8C%87%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">Linux cp指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-rm%E6%8C%87%E4%BB%A4"><span class="nav-number">8.</span> <span class="nav-text">Linux rm指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-mv%E6%8C%87%E4%BB%A4"><span class="nav-number">9.</span> <span class="nav-text">Linux mv指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-cat%E6%8C%87%E4%BB%A4"><span class="nav-number">10.</span> <span class="nav-text">Linux cat指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-less%E6%8C%87%E4%BB%A4"><span class="nav-number">11.</span> <span class="nav-text">Linux less指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gt-%E5%92%8C-gt-gt-%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BF%BD%E5%8A%A0"><span class="nav-number">12.</span> <span class="nav-text">&gt; 和 &gt;&gt; (重定向和追加)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-echo%E6%8C%87%E4%BB%A4"><span class="nav-number">13.</span> <span class="nav-text">Linux echo指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-head%E6%8C%87%E4%BB%A4"><span class="nav-number">14.</span> <span class="nav-text">Linux head指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-tail%E6%8C%87%E4%BB%A4"><span class="nav-number">15.</span> <span class="nav-text">Linux tail指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-ln%E6%8C%87%E4%BB%A4-%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">16.</span> <span class="nav-text">Linux ln指令(软链接)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-history%E6%8C%87%E4%BB%A4"><span class="nav-number">17.</span> <span class="nav-text">Linux history指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB%E6%8C%87%E4%BB%A4"><span class="nav-number">18.</span> <span class="nav-text">Linux 时间日期类指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-find%E6%8C%87%E4%BB%A4"><span class="nav-number">19.</span> <span class="nav-text">Linux find指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-locate%E6%8C%87%E4%BB%A4"><span class="nav-number">20.</span> <span class="nav-text">Linux locate指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-grep%E6%8C%87%E4%BB%A4-%E5%92%8C-%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="nav-number">21.</span> <span class="nav-text">Linux grep指令 和 管道符 |</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-%E5%8E%8B%E7%BC%A9-%E5%92%8C-%E8%A7%A3%E5%8E%8B%E7%BC%A9-%E6%8C%87%E4%BB%A4"><span class="nav-number">22.</span> <span class="nav-text">Linux 压缩 和 解压缩 指令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Xiang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
