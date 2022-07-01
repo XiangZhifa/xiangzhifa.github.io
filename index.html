@@ -239,6 +239,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/01/Npm%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/01/Npm%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8/" itemprop="url">Npm基础应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-01T22:00:13+08:00">
+                2022-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Npm/" itemprop="url" rel="index">
+                    <span itemprop="name">Npm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="npm查看包所有版本"><a href="#npm查看包所有版本" class="headerlink" title="npm查看包所有版本"></a>npm查看包所有版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm view &lt;package&gt; versions</span><br></pre></td></tr></table></figure>
+
+<h1 id="npm安装指定版本包"><a href="#npm安装指定版本包" class="headerlink" title="npm安装指定版本包"></a>npm安装指定版本包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;package&gt;@&lt;version&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="npm卸载包"><a href="#npm卸载包" class="headerlink" title="npm卸载包"></a>npm卸载包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall &lt;package-name&gt;</span><br><span class="line"># 全局卸载</span><br><span class="line">npm uninstall -g &lt;package-name&gt;</span><br><span class="line"># 卸载开发依赖项</span><br><span class="line">npm uninstall -D &lt;package-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="npm查看已全局安装的包"><a href="#npm查看已全局安装的包" class="headerlink" title="npm查看已全局安装的包"></a>npm查看已全局安装的包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm list -g --depth 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="npm-依赖与开发依赖"><a href="#npm-依赖与开发依赖" class="headerlink" title="npm 依赖与开发依赖"></a>npm 依赖与开发依赖</h1><p>当使用 npm install <package-name> 安装 npm 软件包时，是将其安装为依赖项。</p>
+<p>该软件包会被自动地列出在 package.json 文件中的 dependencies 列表下（在 npm 5 之前：必须手动指定 –save）。</p>
+<p>当添加了 -D 或 –save-dev 标志时，则会将其安装为开发依赖项（会被添加到 devDependencies 列表）。</p>
+<p>开发依赖是仅用于开发的程序包，在生产环境中并不需要。 例如测试的软件包、webpack 或 Babel。</p>
+<p>当投入生产环境时，如果输入 npm install 且该文件夹包含 package.json 文件时，则会安装它们，因为 npm 会假定这是开发部署。</p>
+<p>需要设置 –production 标志（npm install –production），以避免安装这些开发依赖项。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/20/Nginx%E5%90%88%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -5729,169 +5884,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/04/06/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/06/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx 静态资源优化配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T10:18:21+08:00">
-                2022-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="sendfile指令"><a href="#sendfile指令" class="headerlink" title="sendfile指令"></a>sendfile指令</h3><p>sendfile指令用来开启高效的文件传输模式</p>
-<ol>
-<li>语法：sendfile on | off</li>
-<li>所属块：http server location …</li>
-</ol>
-<h3 id="tcp-nopush指令"><a href="#tcp-nopush指令" class="headerlink" title="tcp_nopush指令"></a>tcp_nopush指令</h3><p>tcp_nopush指令必需在sendfile打开的情况下才会生效。</p>
-<p>tcp_nopush生效的情况下，会先将需要返回的数据存入缓存区，等缓存区存满后，再发送。</p>
-<ol>
-<li>语法：tcp_nopush on | off</li>
-<li>所属块：http server location</li>
-</ol>
-<h3 id="tcp-nodelay指令"><a href="#tcp-nodelay指令" class="headerlink" title="tcp_nodelay指令"></a>tcp_nodelay指令</h3><p>tcp_nodelay指令必需在keepalive连接开启的情况下生效。</p>
-<p>tcp_nodelay生效的情况下，会实时返回数据。</p>
-<ol>
-<li>语法：tcp_nodelay on | off</li>
-<li>所属块：http server location</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">⇨</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">⇨</a>
   </nav>
 
 
@@ -5941,7 +5938,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -5952,7 +5949,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

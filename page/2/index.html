@@ -239,6 +239,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/04/06/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/04/06/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx 静态资源优化配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T10:18:21+08:00">
+                2022-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="sendfile指令"><a href="#sendfile指令" class="headerlink" title="sendfile指令"></a>sendfile指令</h3><p>sendfile指令用来开启高效的文件传输模式</p>
+<ol>
+<li>语法：sendfile on | off</li>
+<li>所属块：http server location …</li>
+</ol>
+<h3 id="tcp-nopush指令"><a href="#tcp-nopush指令" class="headerlink" title="tcp_nopush指令"></a>tcp_nopush指令</h3><p>tcp_nopush指令必需在sendfile打开的情况下才会生效。</p>
+<p>tcp_nopush生效的情况下，会先将需要返回的数据存入缓存区，等缓存区存满后，再发送。</p>
+<ol>
+<li>语法：tcp_nopush on | off</li>
+<li>所属块：http server location</li>
+</ol>
+<h3 id="tcp-nodelay指令"><a href="#tcp-nodelay指令" class="headerlink" title="tcp_nodelay指令"></a>tcp_nodelay指令</h3><p>tcp_nodelay指令必需在keepalive连接开启的情况下生效。</p>
+<p>tcp_nodelay生效的情况下，会实时返回数据。</p>
+<ol>
+<li>语法：tcp_nodelay on | off</li>
+<li>所属块：http server location</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20error_page%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1619,192 +1777,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/20/Nginx%20%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%20%E5%85%B6%E4%BB%96%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/20/Nginx%20%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%20%E5%85%B6%E4%BB%96%E6%8C%87%E4%BB%A4/" itemprop="url">Nginx 全局配置 其他指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-20T22:09:02+08:00">
-                2022-03-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="全局块"><a href="#全局块" class="headerlink" title="全局块"></a>全局块</h3><h3 id="daemon指令"><a href="#daemon指令" class="headerlink" title="daemon指令"></a>daemon指令</h3><p>daemon 设定nginx是否以守护进程的方式启动 (守护进程独立于控制终端，不会随控制终端的关闭而停止)</p>
-<ol>
-<li>语法：daemon on|off</li>
-<li>默认值：on</li>
-</ol>
-<h3 id="pid指令"><a href="#pid指令" class="headerlink" title="pid指令"></a>pid指令</h3><p>pid 用来配置Nginx当前master进程的进程号id存储的文件路径</p>
-<ol>
-<li>语法：pid filePath</li>
-<li>默认值: /var/run/nginx.pid</li>
-</ol>
-<h3 id="error-log指令"><a href="#error-log指令" class="headerlink" title="error_log指令"></a>error_log指令</h3><p>error_log 用来配置Nginx错误日志的存放路径</p>
-<ol>
-<li><p>语法：error_log filePath errorLevel</p>
-</li>
-<li><p>默认值：error_log  /var/log/nginx/error.log notice;</p>
-</li>
-<li><p>错误级别：</p>
-<pre><code> debug-调试消息
-
- info -信息性消息
- 
- notice -公告
- 
- warn -警告
- 
- error -处理请求时出错
- 
- crit -关键问题。需要立即采取行动
- 
- alert -警报。必须立即采取行动
- 
- emerg - 紧急情况。系统处于无法使用的状态
-</code></pre>
-</li>
-</ol>
-<h3 id="include指令"><a href="#include指令" class="headerlink" title="include指令"></a>include指令</h3><p>include 用来引入其他配置文件</p>
-<ol>
-<li>语法：include filePath</li>
-<li>配置位置：任意        </li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">⇦</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">⇨</a>
+    <a class="extend prev" rel="prev" href="/">⇦</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">⇨</a>
   </nav>
 
 
@@ -1854,7 +1831,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1865,7 +1842,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

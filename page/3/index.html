@@ -239,6 +239,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/20/Nginx%20%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%20%E5%85%B6%E4%BB%96%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/20/Nginx%20%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%20%E5%85%B6%E4%BB%96%E6%8C%87%E4%BB%A4/" itemprop="url">Nginx 全局配置 其他指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-20T22:09:02+08:00">
+                2022-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="全局块"><a href="#全局块" class="headerlink" title="全局块"></a>全局块</h3><h3 id="daemon指令"><a href="#daemon指令" class="headerlink" title="daemon指令"></a>daemon指令</h3><p>daemon 设定nginx是否以守护进程的方式启动 (守护进程独立于控制终端，不会随控制终端的关闭而停止)</p>
+<ol>
+<li>语法：daemon on|off</li>
+<li>默认值：on</li>
+</ol>
+<h3 id="pid指令"><a href="#pid指令" class="headerlink" title="pid指令"></a>pid指令</h3><p>pid 用来配置Nginx当前master进程的进程号id存储的文件路径</p>
+<ol>
+<li>语法：pid filePath</li>
+<li>默认值: /var/run/nginx.pid</li>
+</ol>
+<h3 id="error-log指令"><a href="#error-log指令" class="headerlink" title="error_log指令"></a>error_log指令</h3><p>error_log 用来配置Nginx错误日志的存放路径</p>
+<ol>
+<li><p>语法：error_log filePath errorLevel</p>
+</li>
+<li><p>默认值：error_log  /var/log/nginx/error.log notice;</p>
+</li>
+<li><p>错误级别：</p>
+<pre><code> debug-调试消息
+
+ info -信息性消息
+ 
+ notice -公告
+ 
+ warn -警告
+ 
+ error -处理请求时出错
+ 
+ crit -关键问题。需要立即采取行动
+ 
+ alert -警报。必须立即采取行动
+ 
+ emerg - 紧急情况。系统处于无法使用的状态
+</code></pre>
+</li>
+</ol>
+<h3 id="include指令"><a href="#include指令" class="headerlink" title="include指令"></a>include指令</h3><p>include 用来引入其他配置文件</p>
+<ol>
+<li>语法：include filePath</li>
+<li>配置位置：任意        </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/20/Nginx%20events%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1567,155 +1748,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/01/Shell%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/01/Shell%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F/" itemprop="url">Shell位置参数变量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-01T00:05:50+08:00">
-                2022-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>Shell位置参数变量，可以获取命令行参数。</p>
-<p><img src="/images/Linux/shell-position-params.jpg"></p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>编写shell脚本 positionParams.sh，在脚本中获取命令行的各个参数信息。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">1 新建并编辑 positionParams.sh 文件</span></span><br><span class="line">nano positionParams.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">2 在 positionParams.sh 中写下如下内容：</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示命令行前三个参数</span></span><br><span class="line">echo &quot;$0 $1 $2&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示命令行所有参数，并视作一个整体</span></span><br><span class="line">echo &quot;$*&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示命令行所有参数，并分别处理</span></span><br><span class="line">echo &quot;$@&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示命令行参数个数</span></span><br><span class="line">echo &quot;命令行参数个数=$#&quot;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行 positionParams.sh</span></span><br><span class="line">sh ./positionParams.sh 30 60</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行输出的结果分别为：</span></span><br><span class="line">./positionParams.sh 30 60</span><br><span class="line">30 60</span><br><span class="line">30 60</span><br><span class="line">命令行参数个数=2</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">⇦</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">⇨</a>
+    <a class="extend prev" rel="prev" href="/page/2/">⇦</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">⇨</a>
   </nav>
 
 
@@ -1765,7 +1802,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1776,7 +1813,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
