@@ -239,6 +239,670 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/JavaScript%20new%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/19/JavaScript%20new%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/" itemprop="url">JavaScript new模拟实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-19T17:01:48+08:00">
+                2022-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new 运算符作用举例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Otaku</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.habit = <span class="string">&#x27;Games&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为缺乏锻炼的缘故，身体强度让人担忧</span></span><br><span class="line">Otaku.prototype.strength = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">Otaku.prototype.sayYourName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Otaku(<span class="string">&#x27;Kevin&#x27;</span>, <span class="string">&#x27;18&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// Kevin</span></span><br><span class="line"><span class="built_in">console</span>.log(person.habit); <span class="comment">// Games</span></span><br><span class="line"><span class="built_in">console</span>.log(person.strength); <span class="comment">// 60</span></span><br><span class="line">person.sayYourName(); <span class="comment">// I am Kevin</span></span><br></pre></td></tr></table></figure>
+<p>从这个例子中，我们可以看到，new运算符生成的实例 person 可以：</p>
+<ol>
+<li>访问到 Otaku 构造函数里的属性</li>
+<li>访问到 Otaku.prototype 中的属性</li>
+</ol>
+<h4 id="注意！！！因为-new-是关键字，所以无法像-bind-函数一样直接覆盖，所以我们写一个函数，命名为-objectFactory，来模拟-new-的效果。用的时候是这样的："><a href="#注意！！！因为-new-是关键字，所以无法像-bind-函数一样直接覆盖，所以我们写一个函数，命名为-objectFactory，来模拟-new-的效果。用的时候是这样的：" class="headerlink" title="注意！！！因为 new 是关键字，所以无法像 bind 函数一样直接覆盖，所以我们写一个函数，命名为 objectFactory，来模拟 new 的效果。用的时候是这样的："></a>注意！！！因为 new 是关键字，所以无法像 bind 函数一样直接覆盖，所以我们写一个函数，命名为 objectFactory，来模拟 new 的效果。用的时候是这样的：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Otaku</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 new</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Otaku(……);</span><br><span class="line"><span class="comment">// 使用 objectFactory 第一个参数：传入构造函数 后续参数：传入构造函数的参数</span></span><br><span class="line"><span class="keyword">var</span> person = objectFactory(Otaku, ……)</span><br></pre></td></tr></table></figure>
+
+<h2 id="初步实现"><a href="#初步实现" class="headerlink" title="初步实现"></a>初步实现</h2><p>思路分析：</p>
+<p>因为 new 的结果是一个新对象，所以在模拟实现的时候，我们也要建立一个新对象，假设这个对象叫 obj，因为 obj 会具有 Otaku 构造函数里的属性，想想经典继承的例子，我们可以使用 Otaku.apply(obj, arguments)来给 obj 添加新的属性。</p>
+<p>在 JavaScript 深入系列第一篇中，我们便讲了原型与原型链，我们知道实例的 <code>__proto__</code> 属性会指向构造函数的 prototype ，也正是因为建立起这样的关系，实例可以访问原型上的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objectFactory</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> args = [...arguments];</span><br><span class="line">    <span class="comment">// 从参数数组中分离出构造函数</span></span><br><span class="line">    <span class="keyword">var</span> _Constructor = args.shift;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line">    obj.__proto__ = _Constructor.prototype;</span><br><span class="line">    <span class="comment">// 改变构造函数 this 的指向到新建的对象 obj，构造函数中的相关操作，会直接作用在 obj 上</span></span><br><span class="line">    _Constructor.apply(obj, args);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这一版实现中，我们：</p>
+<ol>
+<li>用new Object() 的方式新建了一个对象 obj</li>
+<li>取出第一个参数，就是我们要传入的构造函数。此外因为 shift 会修改args，所以 args 会被去除第一个参数</li>
+<li>将 obj 的原型指向构造函数，这样 obj 就可以访问到构造函数原型中的属性</li>
+<li>使用 apply ，改变构造函数 this 的指向到新建的对象，这样 obj 就可以访问到构造函数中的属性</li>
+<li>返回 obj</li>
+</ol>
+<h2 id="返回值效果实现"><a href="#返回值效果实现" class="headerlink" title="返回值效果实现"></a>返回值效果实现</h2><p>假如构造函数有返回值，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Otaku</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.strength = <span class="number">60</span>;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        name: name,</span><br><span class="line">        habit: <span class="string">&#x27;Games&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Otaku(<span class="string">&#x27;Kevin&#x27;</span>, <span class="string">&#x27;18&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// Kevin</span></span><br><span class="line"><span class="built_in">console</span>.log(person.habit); <span class="comment">// Games</span></span><br><span class="line"><span class="built_in">console</span>.log(person.strength); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，构造函数返回了一个对象，在实例 person 中 只能访问 返回的对象中的属性 name 和 habit。</p>
+<p>假如，构造函数返回的不是对象，再举一例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Otaku</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.strength = <span class="number">60</span>;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;handsome boy&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Otaku(<span class="string">&#x27;Kevin&#x27;</span>, <span class="string">&#x27;18&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(person.habit); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(person.strength); <span class="comment">// 60</span></span><br><span class="line"><span class="built_in">console</span>.log(person.age); <span class="comment">// 18</span></span><br></pre></td></tr></table></figure>
+<p>这时我们发现，当构造函数返回非对象时，在实例 person 中 只能访问 构造函数中赋值的属性 strength 和 age。</p>
+<p>综上，也就是说，我们还需要在objectFactory中，判断构造函数返回的值是不是一个对象，如果是一个对象，我们就返回这个对象，如果不是对象，我们该返回什么就返回什么。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版的代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objectFactory</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> _Constructor = [].shift.call(<span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    obj.__proto__ = _Constructor.prototype;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> res = _Constructor.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> ? res : obj;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/JavaScript%20bind%E6%96%B9%E6%B3%95%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/19/JavaScript%20bind%E6%96%B9%E6%B3%95%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/" itemprop="url">JavaScript bind方法模拟实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-19T17:01:40+08:00">
+                2022-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h2><p>bind() 方法会创建一个新函数。当这个新函数被调用时，bind() 的第一个参数将作为它运行时的 this，之后的一序列参数将会在传递的实参前传入作为它的参数。(来自于 MDN )</p>
+<p>从以上定义可以得出bind函数的两个特点：</p>
+<ol>
+<li>返回一个新函数</li>
+<li>可以传入参数</li>
+</ol>
+<h2 id="返回新函数模拟实现"><a href="#返回新函数模拟实现" class="headerlink" title="返回新函数模拟实现"></a>返回新函数模拟实现</h2><p>返回新函数需求如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回了一个函数</span></span><br><span class="line"><span class="keyword">var</span> bindFoo = bar.bind(foo); </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(bindFoo()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>关于指定 this 的指向，我们可以直接使用 call 或者 apply 实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.mockBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">// apply/call 会直接执行函数，所以用外层函数包裹apply并返回，</span></span><br><span class="line">    <span class="comment">// 当外层函数执行时，apply才被调用，函数才会被真正执行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// return self.apply(context) 是为了抛出函数的返回值</span></span><br><span class="line">        <span class="keyword">return</span> self.apply(context);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="传参模拟实现"><a href="#传参模拟实现" class="headerlink" title="传参模拟实现"></a>传参模拟实现</h2><p>bind传参特点：</p>
+<ol>
+<li>在 bind 的时候，可以传参呢</li>
+<li>在执行 bind 返回的函数的时候，也可以传参</li>
+</ol>
+<p>基于以上特点的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    <span class="built_in">console</span>.log(age);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bindFoo = bar.bind(foo, <span class="string">&#x27;daisy&#x27;</span>);</span><br><span class="line">bindFoo(<span class="string">&#x27;18&#x27;</span>);</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// daisy</span></span><br><span class="line"><span class="comment">// 18</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，函数需要传 name 和 age 两个参数，竟然可以在 bind 的时候，只传一个 name，在执行返回的函数的时候，再传另一个参数 age。</p>
+<p>根据以上需求，对 arguments 进行处理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.mockBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> self = <span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">// !!! 获取 mockBind函数 从第二个参数到最后一个参数</span></span><br><span class="line">    <span class="keyword">var</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// !!! 这个时候的 arguments 是指 bind 返回的匿名函数传入的参数</span></span><br><span class="line">        <span class="keyword">var</span> bindArgs = [...arguments];</span><br><span class="line">        <span class="keyword">return</span> self.apply(context, args.concat(bindArgs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数效果模拟实现"><a href="#构造函数效果模拟实现" class="headerlink" title="构造函数效果模拟实现"></a>构造函数效果模拟实现</h2><p>bind方法还有一个特点：一个绑定函数也能使用new操作符创建对象：这种行为就像把原函数当成构造器。提供的 this 值被忽略，同时调用时的参数被提供给模拟函数。</p>
+<p>也就是说，当 bind 返回的函数作为构造函数的时候，bind 时指定的 this 值会失效，但传入的参数依然生效。举个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.habit = <span class="string">&#x27;shopping&#x27;</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    <span class="built_in">console</span>.log(age);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.prototype.friend = <span class="string">&#x27;kevin&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bindFoo = bar.bind(foo, <span class="string">&#x27;daisy&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> bindFoo(<span class="string">&#x27;18&#x27;</span>);</span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// daisy</span></span><br><span class="line"><span class="comment">// 18</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.habit);</span><br><span class="line"><span class="built_in">console</span>.log(obj.friend);</span><br><span class="line"><span class="comment">// shopping</span></span><br><span class="line"><span class="comment">// kevin</span></span><br></pre></td></tr></table></figure>
+<h4 id="注意：尽管在全局和-foo-中都声明了-value-值，最后依然返回了-undefined，说明绑定的-this-失效了。"><a href="#注意：尽管在全局和-foo-中都声明了-value-值，最后依然返回了-undefined，说明绑定的-this-失效了。" class="headerlink" title="注意：尽管在全局和 foo 中都声明了 value 值，最后依然返回了 undefined，说明绑定的 this 失效了。"></a>注意：尽管在全局和 foo 中都声明了 value 值，最后依然返回了 undefined，说明绑定的 this 失效了。</h4><p>所以我们可以通过修改返回的函数的原型来实现，让我们写一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第三版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.mockBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">var</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fBound = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bindArgs = [...arguments];</span><br><span class="line">        <span class="comment">// 当作为构造函数时，this 指向实例，此时结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值</span></span><br><span class="line">        <span class="comment">// 当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context</span></span><br><span class="line">        <span class="keyword">return</span> self.apply((<span class="built_in">this</span>.__proto__===fBound.prototype ? <span class="built_in">this</span> : context), args.concat(bindArgs));</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数的原型中的值</span></span><br><span class="line">    fBound.prototype = <span class="built_in">this</span>.prototype;</span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数效果的优化实现"><a href="#构造函数效果的优化实现" class="headerlink" title="构造函数效果的优化实现"></a>构造函数效果的优化实现</h2><p>但是在上面写法中，我们直接将 fBound.prototype = this.prototype，我们直接修改 fBound.prototype 的时候，也会直接修改绑定函数的 prototype。这个时候，我们可以通过一个空函数来进行中转：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第四版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.mockBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> self = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">var</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fNOP = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fBound = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bindArgs = [...arguments];</span><br><span class="line">        <span class="keyword">return</span> self.apply((<span class="built_in">this</span>.__proto__===fBound.prototype ? <span class="built_in">this</span> : context), args.concat(bindArgs));</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    fNOP.prototype = <span class="built_in">this</span>.prototype;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最终优化"><a href="#最终优化" class="headerlink" title="最终优化"></a>最终优化</h2><ol>
+<li>如果调用 bind 的不是函数，需要报错</li>
+<li>考虑bind的兼容性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.mockBind = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">this</span> !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;Function.prototype.bind - what is trying to be bound is not a Function&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> self = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fNOP = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fBound = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> bindArgs = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">        <span class="keyword">return</span> self.apply((<span class="built_in">this</span>.__proto__===fBound.prototype ? <span class="built_in">this</span> : context), args.concat(bindArgs));</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    fNOP.prototype = <span class="built_in">this</span>.prototype;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/JavaScript%20call%E5%92%8Capply%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/19/JavaScript%20call%E5%92%8Capply%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0/" itemprop="url">JavaScript call和apply模拟实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-19T17:01:33+08:00">
+                2022-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="call"><a href="#call" class="headerlink" title="call"></a>call</h2><p>JavScript call方法：使用一个指定的 this 值 和 若干个指定的参数值 的前提下，调用某个函数或方法。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.call(foo); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>注意两点：</p>
+<ol>
+<li>call 改变了 this 的指向，指向到 foo</li>
+<li>bar 函数执行了</li>
+</ol>
+<h2 id="call方法初步模拟-不带参数"><a href="#call方法初步模拟-不带参数" class="headerlink" title="call方法初步模拟 (不带参数)"></a>call方法初步模拟 (不带参数)</h2><p>思路如下，试想当调用 call 的时候，对 foo 对象进行改造：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span>,</span><br><span class="line">    bar: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">foo.bar(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>这个时候 this 就指向了 foo，</p>
+<p>但是，foo 对象本身被添加了一个bar属性，</p>
+<p>所以，我们需要用 delete 再删除bar属性。</p>
+<p>我们按照上面的思路，实现 mockCall：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.mockCall = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 首先要获取需要执行的函数，用this可以获取</span></span><br><span class="line">    context.fn = <span class="built_in">this</span>; <span class="comment">// 此处 this === 调用mockCall的函数 </span></span><br><span class="line">    context.fn();</span><br><span class="line">    <span class="keyword">delete</span> context.fn;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试一下</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.mockCall(foo); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="call方法进阶模拟-带参数"><a href="#call方法进阶模拟-带参数" class="headerlink" title="call方法进阶模拟 (带参数)"></a>call方法进阶模拟 (带参数)</h2><p>JavaScript call方法，能代入给定参数，执行函数，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    <span class="built_in">console</span>.log(age);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.call(foo, <span class="string">&#x27;kevin&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"><span class="comment">// kevin</span></span><br><span class="line"><span class="comment">// 18</span></span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<h4 id="注意：call方法传入的参数并不确定"><a href="#注意：call方法传入的参数并不确定" class="headerlink" title="注意：call方法传入的参数并不确定"></a>注意：call方法传入的参数并不确定</h4><p>所以，我们需要从 Arguments 对象中取值，取出第二个到最后一个参数，然后放到一个数组里。  //Arguments第一个参数是context</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.mockCall = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">    context.fn = <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">var</span> args = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++) &#123;</span><br><span class="line">        args.push(<span class="built_in">arguments</span>[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    context.fn(...args);</span><br><span class="line">    <span class="keyword">delete</span> context.fn;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试一下</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);</span><br><span class="line">    <span class="built_in">console</span>.log(age);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.mockCall(foo, <span class="string">&#x27;kevin&#x27;</span>, <span class="number">18</span>); </span><br><span class="line"><span class="comment">// kevin</span></span><br><span class="line"><span class="comment">// 18</span></span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="call方法完善模拟-最终版"><a href="#call方法完善模拟-最终版" class="headerlink" title="call方法完善模拟 (最终版)"></a>call方法完善模拟 (最终版)</h2><p>以上已经完成call方法大部分功能，但仍有两点缺陷：</p>
+<ol>
+<li>指定的 this 值，可以传 null，当为 null 的时候，视为指向 window。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.call(<span class="literal">null</span>); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></li>
+<li>函数是可以有返回值的。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        value: <span class="built_in">this</span>.value,</span><br><span class="line">        name: name,</span><br><span class="line">        age: age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(bar.call(obj, <span class="string">&#x27;kevin&#x27;</span>, <span class="number">18</span>));</span><br><span class="line"><span class="comment">// Object &#123;</span></span><br><span class="line"><span class="comment">//    value: 1,</span></span><br><span class="line"><span class="comment">//    name: &#x27;kevin&#x27;,</span></span><br><span class="line"><span class="comment">//    age: 18</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+对于以上两点细节，我们在 mockCall 方法中做出如下完善：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第三版</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.call2 = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</span><br><span class="line">    context = context || <span class="built_in">window</span>;</span><br><span class="line">    context.fn = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> args = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++) &#123;</span><br><span class="line">        args.push(<span class="built_in">arguments</span>[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> result = context.fn(...args);</span><br><span class="line">    <span class="keyword">delete</span> context.fn;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试一下</span></span><br><span class="line"><span class="keyword">var</span> value = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.value);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        value: <span class="built_in">this</span>.value,</span><br><span class="line">        name: name,</span><br><span class="line">        age: age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar.call2(<span class="literal">null</span>); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(bar.call2(obj, <span class="string">&#x27;kevin&#x27;</span>, <span class="number">18</span>));</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// Object &#123;</span></span><br><span class="line"><span class="comment">//    value: 1,</span></span><br><span class="line"><span class="comment">//    name: &#x27;kevin&#x27;,</span></span><br><span class="line"><span class="comment">//    age: 18</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="apply模拟实现"><a href="#apply模拟实现" class="headerlink" title="apply模拟实现"></a>apply模拟实现</h2><p>实现思路与mockCall类似。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.apply = <span class="function"><span class="keyword">function</span> (<span class="params">context, arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> context = <span class="built_in">Object</span>(context) || <span class="built_in">window</span>;</span><br><span class="line">    context.fn = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> result;</span><br><span class="line">    result = !arr ? context.fn() : context.fn(...arr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> context.fn</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/JavaScript%20%E5%8F%82%E6%95%B0%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/19/JavaScript%20%E5%8F%82%E6%95%B0%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92/" itemprop="url">JavaScript 参数按值传递</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-19T17:01:20+08:00">
+                2022-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="按值传递"><a href="#按值传递" class="headerlink" title="按值传递"></a>按值传递</h2><p>把A变量的值，复制给B变量，B变量的相关操作不会影响A变量。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    v = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(value);</span><br><span class="line"><span class="built_in">console</span>.log(value); <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="引用传递"><a href="#引用传递" class="headerlink" title="引用传递"></a>引用传递</h2><p>按引用传递，就是传递对象的引用，函数内部对参数的任何改变，都会影响该对象的值，因为两者引用的是同一个对象。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    o.value = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(o.value); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(obj);</span><br><span class="line"><span class="built_in">console</span>.log(obj.value) <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="共享传递-Javascript传递对象的方式"><a href="#共享传递-Javascript传递对象的方式" class="headerlink" title="共享传递 (Javascript传递对象的方式)"></a>共享传递 (Javascript传递对象的方式)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    value: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    o = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(o); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(obj);</span><br><span class="line"><span class="built_in">console</span>.log(obj.value) <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<p>如果 JavaScript 采用的是引用传递，外层的值也会被修改呐，这怎么又没被改呢？所以真的不是引用传递吗？</p>
+<p>这就要讲到其实还有第三种传递方式，叫按共享传递。</p>
+<h4 id="共享传递是指，在传递对象的时候，传递对象的引用的副本。"><a href="#共享传递是指，在传递对象的时候，传递对象的引用的副本。" class="headerlink" title="共享传递是指，在传递对象的时候，传递对象的引用的副本。"></a>共享传递是指，在传递对象的时候，传递对象的引用的副本。</h4><h4 id="注意：-按引用传递是传递对象的引用，而按共享传递是传递对象的引用的副本！"><a href="#注意：-按引用传递是传递对象的引用，而按共享传递是传递对象的引用的副本！" class="headerlink" title="注意： 按引用传递是传递对象的引用，而按共享传递是传递对象的引用的副本！"></a>注意： 按引用传递是传递对象的引用，而按共享传递是传递对象的引用的副本！</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/JavaScript%20this%E6%8C%87%E5%90%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -5312,594 +5976,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/20/Nginx%20rewrite%E4%B9%8Bset%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/20/Nginx%20rewrite%E4%B9%8Bset%E6%8C%87%E4%BB%A4/" itemprop="url">Nginx rewrite之set指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-20T06:27:19+08:00">
-                2022-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set $变量名 变量值</span><br></pre></td></tr></table></figure>
-
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 8081;</span><br><span class="line">  server_name localhost;</span><br><span class="line">  location /server &#123;</span><br><span class="line">    set $name TOM;</span><br><span class="line">    set $age 18;</span><br><span class="line">    default_type text/plain;</span><br><span class="line">    return 200 $name=$age;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/19/Nginx%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/19/Nginx%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx 浏览器缓存配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-19T12:52:52+08:00">
-                2022-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="expires指令"><a href="#expires指令" class="headerlink" title="expires指令"></a>expires指令</h4><ol>
-<li>语法: expires time | epoch | max | off</li>
-<li>默认值:  expires off</li>
-<li>位置: http, server, location</li>
-</ol>
-<p>time: 指定缓存过期时间（以秒计数），可以是整数也可以是负数。如果是负数，Cache-Control 为 no-cache；如果是整数或0，Cache-Control 为 max-age=time；</p>
-<p>epoch: 指定Expires值为1970，Cache-Control 为 no-cache；</p>
-<p>max：指定Expires值为2037，Cache-Control 为 10年；</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/19/Nginx%20%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/19/Nginx%20%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx 跨域请求配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-19T12:52:52+08:00">
-                2022-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="add-header指令"><a href="#add-header指令" class="headerlink" title="add_header指令"></a>add_header指令</h4><p>通过add_header，可以在请求头中添加相关属性。</p>
-<ol>
-<li>语法: add_header 属性名 属性值</li>
-<li>位置: http, server, location</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_header Access-Control-Allow-Origin * | 允许访问的地址(协议://ip|域名/路径);</span><br><span class="line">add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/19/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/06/19/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE/" itemprop="url">Nginx 静态资源防盗链</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-19T12:52:51+08:00">
-                2022-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="valid-referers指令"><a href="#valid-referers指令" class="headerlink" title="valid_referers指令"></a>valid_referers指令</h4><ol>
-<li>语法: valid_referers none | blocked | server_names</li>
-<li>位置：server, location</li>
-</ol>
-<p>none: 如果header中referer为空，允许访问（例如：直接访问）</p>
-<p>blocked: 在header中referer不为空，但该值被防火墙或代理进行过伪装，如果不带”http://“，”https://“等协议头的资源允许访问</p>
-<p>server_names: 指定具体的域名或ips</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ~ .*\.(png|jpg|gif)$ &#123;</span><br><span class="line">  valid_referers none blocked www.baidu.com;</span><br><span class="line">  if ($invalid_referer) &#123;</span><br><span class="line">    return 403;</span><br><span class="line">  &#125;</span><br><span class="line">  root html/images;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -5954,7 +6030,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

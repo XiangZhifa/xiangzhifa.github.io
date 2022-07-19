@@ -239,6 +239,594 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/20/Nginx%20rewrite%E4%B9%8Bset%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/20/Nginx%20rewrite%E4%B9%8Bset%E6%8C%87%E4%BB%A4/" itemprop="url">Nginx rewrite之set指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-20T06:27:19+08:00">
+                2022-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set $变量名 变量值</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 8081;</span><br><span class="line">  server_name localhost;</span><br><span class="line">  location /server &#123;</span><br><span class="line">    set $name TOM;</span><br><span class="line">    set $age 18;</span><br><span class="line">    default_type text/plain;</span><br><span class="line">    return 200 $name=$age;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/19/Nginx%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/19/Nginx%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx 浏览器缓存配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-19T12:52:52+08:00">
+                2022-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="expires指令"><a href="#expires指令" class="headerlink" title="expires指令"></a>expires指令</h4><ol>
+<li>语法: expires time | epoch | max | off</li>
+<li>默认值:  expires off</li>
+<li>位置: http, server, location</li>
+</ol>
+<p>time: 指定缓存过期时间（以秒计数），可以是整数也可以是负数。如果是负数，Cache-Control 为 no-cache；如果是整数或0，Cache-Control 为 max-age=time；</p>
+<p>epoch: 指定Expires值为1970，Cache-Control 为 no-cache；</p>
+<p>max：指定Expires值为2037，Cache-Control 为 10年；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/19/Nginx%20%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/19/Nginx%20%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx 跨域请求配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-19T12:52:52+08:00">
+                2022-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="add-header指令"><a href="#add-header指令" class="headerlink" title="add_header指令"></a>add_header指令</h4><p>通过add_header，可以在请求头中添加相关属性。</p>
+<ol>
+<li>语法: add_header 属性名 属性值</li>
+<li>位置: http, server, location</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_header Access-Control-Allow-Origin * | 允许访问的地址(协议://ip|域名/路径);</span><br><span class="line">add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/06/19/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/06/19/Nginx%20%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E9%98%B2%E7%9B%97%E9%93%BE/" itemprop="url">Nginx 静态资源防盗链</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-06-19T12:52:51+08:00">
+                2022-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="valid-referers指令"><a href="#valid-referers指令" class="headerlink" title="valid_referers指令"></a>valid_referers指令</h4><ol>
+<li>语法: valid_referers none | blocked | server_names</li>
+<li>位置：server, location</li>
+</ol>
+<p>none: 如果header中referer为空，允许访问（例如：直接访问）</p>
+<p>blocked: 在header中referer不为空，但该值被防火墙或代理进行过伪装，如果不带”http://“，”https://“等协议头的资源允许访问</p>
+<p>server_names: 指定具体的域名或ips</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ~ .*\.(png|jpg|gif)$ &#123;</span><br><span class="line">  valid_referers none blocked www.baidu.com;</span><br><span class="line">  if ($invalid_referer) &#123;</span><br><span class="line">    return 403;</span><br><span class="line">  &#125;</span><br><span class="line">  root html/images;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/04/06/Nginx%20%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1167,620 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20index%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/23/Nginx%20index%E6%8C%87%E4%BB%A4/" itemprop="url">Nginx index指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T18:41:21+08:00">
-                2022-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="index指令"><a href="#index指令" class="headerlink" title="index指令"></a>index指令</h3><p>index指令用来设置默认首页</p>
-<ol>
-<li>语法：index file1 file2 file3 …;</li>
-<li>所属块：http，server，location<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 假设，test.png图片存放在 /usr/share/nginx/www/images 目录下</span></span><br><span class="line">location /images &#123;</span><br><span class="line">  root /usr/share/nginx/www;</span><br><span class="line">  index test.png</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时，只要访问 http://ip:port/images 就能直接访问图片，不需要再跟上文件名</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20root%E5%92%8Calias%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/23/Nginx%20root%E5%92%8Calias%E6%8C%87%E4%BB%A4/" itemprop="url">Nginx root和alias指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T16:43:40+08:00">
-                2022-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="root指令"><a href="#root指令" class="headerlink" title="root指令"></a>root指令</h3><ol>
-<li>语法：root path</li>
-<li>所属块：http，server，location<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 假设，test.png图片存放在 /usr/share/nginx/www/images 目录下</span></span><br><span class="line">location /images &#123;</span><br><span class="line">  root /usr/share/nginx/www;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="alias指令"><a href="#alias指令" class="headerlink" title="alias指令"></a>alias指令</h3><ol>
-<li>语法：alias path</li>
-<li>所属块：location<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 假设，test.png图片存放在 /usr/share/nginx/www/images 目录下</span></span><br><span class="line">location /images &#123;</span><br><span class="line">  alias /usr/share/nginx/www/images;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h3><ol>
-<li>root转发的结果：root路径+location路径</li>
-<li>alias转发的结果：alias路径直接替换location路径</li>
-<li>如果location以 / 结尾，alias也必须以 / 结尾，而root则没有这个要求</li>
-<li>root是定义最上层的目录含义，alias是定义目录的别名</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20location%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/23/Nginx%20location%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx location指令配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T16:07:34+08:00">
-                2022-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="location指令"><a href="#location指令" class="headerlink" title="location指令"></a>location指令</h3><ol>
-<li>语法：location [ = 、~ 、 ~* 、 ^~ 、 @]url (共六种匹配方式)</li>
-<li>所属块：server , location</li>
-</ol>
-<h3 id="location-无符号-匹配"><a href="#location-无符号-匹配" class="headerlink" title="location 无符号 匹配"></a>location 无符号 匹配</h3><p>无符号：宽泛匹配，例如 /test123 依然能够访问 /test</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /test &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="location-匹配"><a href="#location-匹配" class="headerlink" title="location = 匹配"></a>location = 匹配</h3><p>=：精确匹配，用于不含正则表达式的url前，例如 必须是/test 才能访问 /test</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location =/test &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="location-和-匹配"><a href="#location-和-匹配" class="headerlink" title="location ~ 和 ~* 匹配"></a>location ~ 和 ~* 匹配</h3><p>~：表示url中包含正则表达式，且区分大小写</p>
-<p>~*：表示url中包含正则表达式，且不区分大小写</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ~匹配，区分大小写</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 该正则含义：/<span class="built_in">test</span>后，必须再跟上任意字符/数字/下划线均可</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 例如：/<span class="built_in">test</span>返回404，/test_可以正常访问</span></span><br><span class="line">location ~^/test\w$ &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ~*匹配，不区分大小写，例如：/TEst_依然可以访问</span></span><br><span class="line">location ~*^/test\w$ &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="匹配"><a href="#匹配" class="headerlink" title="^~匹配"></a>^~匹配</h3><p>^~：用于不含正则表达式的url前，效果与无符号一致，唯一不同的是，如果当前模式匹配，会停止继续向后搜索其他模式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location ^~/test &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test ^~ success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20server_name%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/23/Nginx%20server_name%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx server_name指令配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T14:14:37+08:00">
-                2022-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="server-name指令"><a href="#server-name指令" class="headerlink" title="server_name指令"></a>server_name指令</h3><ol>
-<li>语法：server_name name1 name2 …; (name的值可以是IP或域名，配置多个name用空格符隔开即可)</li>
-<li>默认值：server_name “”;</li>
-<li>所属块：server</li>
-</ol>
-<h3 id="server-name精确匹配"><a href="#server-name精确匹配" class="headerlink" title="server_name精确匹配"></a>server_name精确匹配</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 配置本地域名 C:\Windows\System32\drivers\etc目录下，hosts文件中，配置域名和IP的对应关系</span></span><br><span class="line">server_name 127.0.0.1 www.jeffreyxiang.cn;</span><br></pre></td></tr></table></figure>
-
-<h3 id="server-name通配符匹配"><a href="#server-name通配符匹配" class="headerlink" title="server_name通配符匹配"></a>server_name通配符匹配</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> server_name支持通配符配置，但是只能放在域名的首部或尾部！！！不能放在域名的中间！！！</span></span><br><span class="line">server_name *.jeffreyxiang.cn www.jeffreyxiang.*;</span><br></pre></td></tr></table></figure>
-
-<h3 id="server-name正则表达式匹配"><a href="#server-name正则表达式匹配" class="headerlink" title="server_name正则表达式匹配"></a>server_name正则表达式匹配</h3><p>sever_name可以使用正则表达式，但是需要使用 ~ 作为正则表达式开始的标记</p>
-<h4 id="正则表达式匹配语法"><a href="#正则表达式匹配语法" class="headerlink" title="正则表达式匹配语法"></a>正则表达式匹配语法</h4><p><img src="/images/Nginx/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg"></p>
-<h4 id="server-name正则匹配案例"><a href="#server-name正则匹配案例" class="headerlink" title="server_name正则匹配案例"></a>server_name正则匹配案例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server_name ~^www\.(\w+)\.com$</span><br></pre></td></tr></table></figure>
-
-<h3 id="server-name匹配执行顺序"><a href="#server-name匹配执行顺序" class="headerlink" title="server_name匹配执行顺序"></a>server_name匹配执行顺序</h3><p>精确匹配 &gt; 首部通配符匹配 &gt; 尾部通配符匹配 &gt; 正则匹配 &gt; default_server</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1835,7 +1809,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
