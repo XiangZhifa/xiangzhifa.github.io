@@ -239,6 +239,577 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/05/01/RedisList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/05/01/RedisList/" itemprop="url">Redis中的List类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-01T16:51:04+08:00">
+                2021-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> !!! 所有的 list命令 都是以 l 开头的</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> !!! list中最后push的值index为0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> push值</span></span><br><span class="line">LPUSH key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 向尾部push值</span></span><br><span class="line">RPUSH key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取值(设置 0,-1 可以查看全部值)</span></span><br><span class="line">LRANGE key startIdx endIdx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除值</span></span><br><span class="line">LPOP key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除尾值</span></span><br><span class="line">RPOP key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过下标获取值</span></span><br><span class="line">LINDEX key index</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取list的长度</span></span><br><span class="line">LLEN key  </span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/20/RedisString/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/20/RedisString/" itemprop="url">Redis中的String类型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-20T00:16:57+08:00">
+                2021-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加字符串 (会返回字符串的长度) (如果key不存在会创建新key，相当于<span class="built_in">set</span> key)</span></span><br><span class="line">APPEND key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取字符串长度</span></span><br><span class="line">STRLEN key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 自加命令 (相当于 i++)</span></span><br><span class="line">INCR key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 自减命令 (相当于 i--)</span></span><br><span class="line">DECR key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 加固定数值</span></span><br><span class="line">INCRBY key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 减固定数值</span></span><br><span class="line">DECRBY key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取指定区间范围内的字符串 (设置 0,-1 可以查看全部字符串)</span></span><br><span class="line">GETRANGE key startIdx endIdx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换指定位置开始的字符串</span></span><br><span class="line">SETRANGE key offset str</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置带过期时间的数据</span></span><br><span class="line">SETEX key time value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果key不存在，再进行创建 (如果key存在不会进行操作)</span></span><br><span class="line">SETNX key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 批量设置</span></span><br><span class="line">MSET key1 value1 key2 value2......</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果key不存在，再进行批量创建 (保证原子性，要么一起成功，要么一起失败)</span></span><br><span class="line">MSETNX key1 value1 key2 value2......</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 批量获取</span></span><br><span class="line">MGET key1 key2......</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置JSON字符串对象 (例如 <span class="built_in">set</span> user:1:name zhangsan)</span></span><br><span class="line">SET ObjectName:id:field value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 先get 然后再<span class="built_in">set</span> (如果不存在值，会返回null，如果存在值，会返回当前值，并设置新值)</span></span><br><span class="line">GETSET key value</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/15/RedisBasicCommand/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/15/RedisBasicCommand/" itemprop="url">Redis基础命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-15T00:52:58+08:00">
+                2021-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Redis基础命令"><a href="#Redis基础命令" class="headerlink" title="Redis基础命令"></a>Redis基础命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> index表示数据库编号（0~15），可以切换数据库</span></span><br><span class="line">select index</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看数据库大小</span></span><br><span class="line">DBSIZE</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有key</span></span><br><span class="line">keys *</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置键值对</span></span><br><span class="line">set key value</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看对应key的值</span></span><br><span class="line">get key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清空当前库</span></span><br><span class="line">flushdb</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清空全部库</span></span><br><span class="line">flushall</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断key是否存在</span></span><br><span class="line">exist key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 移动key到其他数据库</span></span><br><span class="line">move key dbindex</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置key value过期时间</span></span><br><span class="line">expire key seconds</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看key的类型</span></span><br><span class="line">type key</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/15/RedisBasic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/15/RedisBasic/" itemprop="url">Redis基础知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-15T00:20:09+08:00">
+                2021-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Redis基础知识"><a href="#Redis基础知识" class="headerlink" title="Redis基础知识"></a>Redis基础知识</h3><p>Redis默认有16个数据库（redis.conf中可以查看配置 database 16）</p>
+<p>!!! Redis是单线程的 !!!<br>官方表示，Redis是基于内存操作的，CPU不是Redis的性能瓶颈。Redis的瓶颈在于带宽和服务器内存，所以能使用单线程就使用单线程。</p>
+<h3 id="Redis单线程快的原因"><a href="#Redis单线程快的原因" class="headerlink" title="Redis单线程快的原因"></a>Redis单线程快的原因</h3><p>Redis是将所有的数据全部放在内存中，单线程不需要像多线程那样切换上下文，多次读写全部在同一个CPU上，在此情况下单线程就是最佳方案</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/10/JenkinsPipeline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1154,491 +1725,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/03/28/TsFunction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/28/TsFunction/" itemprop="url">TypeScript中的函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T13:55:41+08:00">
-                2021-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
-                    <span itemprop="name">TypeScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="函数声明法"><a href="#函数声明法" class="headerlink" title="函数声明法"></a>函数声明法</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;run&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> func = ():<span class="function"><span class="params">number</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">123</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="定义方法传参"><a href="#定义方法传参" class="headerlink" title="定义方法传参"></a>定义方法传参</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:<span class="built_in">string</span>,age:<span class="built_in">number</span></span>):<span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span>--<span class="subst">$&#123;age&#125;</span>`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:<span class="built_in">string</span>,age?:<span class="built_in">number</span></span>):<span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!!age) &#123;</span><br><span class="line">    <span class="keyword">return</span>  <span class="string">`<span class="subst">$&#123;name&#125;</span>--<span class="subst">$&#123;age&#125;</span>`</span></span><br><span class="line"> &#125;  </span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span>--年龄保密`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getInfo(<span class="string">&#x27;张三&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:<span class="built_in">string</span>,age:<span class="built_in">number</span>=<span class="number">18</span></span>):<span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span>--<span class="subst">$&#123;age&#125;</span>`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果不传入age，age为默认值18</span></span><br><span class="line">getInfo(<span class="string">&#x27;张三&#x27;</span>)</span><br><span class="line"><span class="comment">//如果传入age，age为传入值</span></span><br><span class="line">getInfo(<span class="string">&#x27;张三&#x27;</span>,<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...params:<span class="built_in">number</span>[]</span>):<span class="title">number</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">  params.forEach(<span class="function"><span class="params">item</span>=&gt;</span>&#123;</span><br><span class="line">    sum+=item</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> sum  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setLessOption</span>(<span class="params">config:<span class="built_in">object</span></span>):<span class="title">object</span> </span></span><br><span class="line"><span class="function"><span class="function"><span class="keyword">function</span> <span class="title">setLessOption</span>(<span class="params">config:<span class="built_in">object</span>,desc:<span class="built_in">string</span></span>):<span class="title">string</span></span></span></span><br><span class="line"><span class="function"><span class="function"><span class="function"><span class="keyword">function</span> <span class="title">setLessOption</span>(<span class="params">config:<span class="built_in">any</span>,desc:<span class="built_in">any</span></span>):[<span class="title">object</span>,<span class="title">string</span>]</span>&#123;</span></span></span><br><span class="line"><span class="function"><span class="function">  <span class="title">return</span> [<span class="title">config</span>,<span class="title">desc</span>]</span></span></span><br><span class="line"><span class="function"><span class="function">&#125;</span></span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/03/28/TsDataElement/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/28/TsDataElement/" itemprop="url">TypeScript中的数据类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T13:52:39+08:00">
-                2021-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
-                    <span itemprop="name">TypeScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="boolean-类型"><a href="#boolean-类型" class="headerlink" title="boolean 类型"></a>boolean 类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> flag:<span class="built_in">boolean</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="number-类型"><a href="#number-类型" class="headerlink" title="number 类型"></a>number 类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a:<span class="built_in">number</span> = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="string-类型"><a href="#string-类型" class="headerlink" title="string 类型"></a>string 类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str:<span class="built_in">string</span> = <span class="string">&#x27;abc&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="array-类型"><a href="#array-类型" class="headerlink" title="array 类型"></a>array 类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1:<span class="built_in">number</span>[] = [];</span><br><span class="line"><span class="keyword">let</span> arr2:<span class="built_in">Array</span>&lt;<span class="built_in">number</span>&gt; = [];</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="tuple-类型-元组"><a href="#tuple-类型-元组" class="headerlink" title="tuple 类型(元组)"></a>tuple 类型(元组)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 元组：定义数组中每个元素的类型</span></span><br><span class="line"><span class="keyword">let</span> arr:[<span class="built_in">string</span>,<span class="built_in">number</span>,<span class="built_in">boolean</span>] = [<span class="string">&#x27;ts&#x27;</span>,<span class="number">3.22</span>,<span class="literal">true</span>]</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="enum-类型-枚举"><a href="#enum-类型-枚举" class="headerlink" title="enum 类型(枚举)"></a>enum 类型(枚举)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* enum类型，适用于以下场景:</span></span><br><span class="line"><span class="comment">* pay_status 0 准备支付  1 支付中  2 支付成功</span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">* !!!注意 枚举类型不赋值时，默认为索引值 0,1,2,3,4……</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">enum</span> pay_status &#123;</span><br><span class="line">  ready = <span class="number">0</span>,</span><br><span class="line">  pending = <span class="number">1</span>,</span><br><span class="line">  success = <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="any-类型"><a href="#any-类型" class="headerlink" title="any 类型"></a>any 类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> test:<span class="built_in">any</span> = <span class="number">123</span>;</span><br><span class="line">test = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="null-和-undefined-never类型的子类型"><a href="#null-和-undefined-never类型的子类型" class="headerlink" title="null 和 undefined(never类型的子类型)"></a>null 和 undefined(never类型的子类型)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* num 赋值后为 number 类型</span></span><br><span class="line"><span class="comment">* num 只声明不赋值为 undefined 类型</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">let</span> num:<span class="built_in">number</span>|<span class="literal">undefined</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num)</span><br><span class="line"></span><br><span class="line"><span class="comment">//一个变量可能是 number类型 /undefined类型 / null类型</span></span><br><span class="line"><span class="keyword">let</span> param:<span class="built_in">number</span>|<span class="literal">undefined</span>|<span class="literal">null</span></span><br><span class="line"><span class="comment">//此时param赋值，必须为 number / undefined / null</span></span><br><span class="line">param = <span class="number">123</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="void-类型-用于表示方法没有返回值"><a href="#void-类型-用于表示方法没有返回值" class="headerlink" title="void 类型(用于表示方法没有返回值)"></a>void 类型(用于表示方法没有返回值)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">void</span> </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;running&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="never-类型-指其他类型，包含null和undefined"><a href="#never-类型-指其他类型，包含null和undefined" class="headerlink" title="never 类型(指其他类型，包含null和undefined)"></a>never 类型(指其他类型，包含null和undefined)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* never类型代表从来不会出现的值</span></span><br><span class="line"><span class="comment">* 这就意味着，never类型的变量，只能被never类型赋值</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">let</span> param:<span class="literal">undefined</span>;</span><br><span class="line"><span class="comment">//param = 123;  报错，param的值只能为undefined</span></span><br><span class="line">param = <span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/03/23/HexoInit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/03/23/HexoInit/" itemprop="url">Hexo Init</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-23T01:55:02+08:00">
-                2021-03-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="创建一篇新日志"><a href="#创建一篇新日志" class="headerlink" title="创建一篇新日志"></a>创建一篇新日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>详情： <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Hexo写作</a></p>
-<h3 id="运行Hexo服务"><a href="#运行Hexo服务" class="headerlink" title="运行Hexo服务"></a>运行Hexo服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>详情： <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Hexo服务</a></p>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>详情： <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Hexo生成器</a></p>
-<h3 id="部署Hexo博客"><a href="#部署Hexo博客" class="headerlink" title="部署Hexo博客"></a>部署Hexo博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>详情： <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Hexo部署</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/">⇦</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/">⇦</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">⇨</a>
   </nav>
 
 
@@ -1688,7 +1779,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
