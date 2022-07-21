@@ -239,6 +239,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/JavaScript%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/19/JavaScript%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" itemprop="url">JavaScript 执行上下文</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-19T09:05:27+08:00">
+                2022-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">Javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">&quot;global scope&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">&quot;local scope&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f();</span><br><span class="line">&#125;</span><br><span class="line">checkScope();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">&quot;global scope&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkScope</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scope = <span class="string">&quot;local scope&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> scope;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line">checkScope()();</span><br></pre></td></tr></table></figure>
+
+<p>以上两段代码都会打印出 “local scope” ，但是这两段代码的执行过程，有何不同？</p>
+<h3 id="第一段代码执行分析"><a href="#第一段代码执行分析" class="headerlink" title="第一段代码执行分析"></a>第一段代码执行分析</h3><h4 id="1-执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈"><a href="#1-执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈" class="headerlink" title="1. 执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈"></a>1. 执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-全局上下文初始化"><a href="#2-全局上下文初始化" class="headerlink" title="2. 全局上下文初始化"></a>2. 全局上下文初始化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">globalContext = &#123;</span><br><span class="line">    VO: [<span class="built_in">global</span>],</span><br><span class="line">    Scope: [globalContext.VO],</span><br><span class="line">    <span class="built_in">this</span>: globalContext.VO</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-初始化的同时，checkScope-函数被创建，保存作用域链到函数的内部属性-scope"><a href="#2-初始化的同时，checkScope-函数被创建，保存作用域链到函数的内部属性-scope" class="headerlink" title="2. 初始化的同时，checkScope 函数被创建，保存作用域链到函数的内部属性[[scope]]"></a>2. 初始化的同时，checkScope 函数被创建，保存作用域链到函数的内部属性[[scope]]</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checkScope.[[scope]] = [</span><br><span class="line">  globalContext.VO</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-执行-checkScope-函数，创建-checkScope-函数执行上下文，checkScope-函数执行上下文，被压入执行上下文栈"><a href="#3-执行-checkScope-函数，创建-checkScope-函数执行上下文，checkScope-函数执行上下文，被压入执行上下文栈" class="headerlink" title="3.执行 checkScope 函数，创建 checkScope 函数执行上下文，checkScope 函数执行上下文，被压入执行上下文栈"></a>3.执行 checkScope 函数，创建 checkScope 函数执行上下文，checkScope 函数执行上下文，被压入执行上下文栈</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    checkScopeContext,</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-checkScope-函数执行上下文初始化"><a href="#4-checkScope-函数执行上下文初始化" class="headerlink" title="4.checkScope 函数执行上下文初始化"></a>4.checkScope 函数执行上下文初始化</h4><ol>
+<li>复制函数 [[scope]] 属性创建作用域链，</li>
+<li>用 arguments 创建活动对象，</li>
+<li>初始化活动对象，即加入形参、函数声明、变量声明，</li>
+<li>将活动对象压入 checkScope 作用域链顶端。</li>
+</ol>
+<p>同时 f 函数被创建，保存作用域链到 f 函数的内部属性[[scope]]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">checkScopeContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        <span class="built_in">arguments</span>: &#123;</span><br><span class="line">            length: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        scope: <span class="literal">undefined</span>,</span><br><span class="line">        f: reference to <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [AO, globalContext.VO],</span><br><span class="line">    <span class="built_in">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-执行-f-函数，创建-f-函数执行上下文，f-函数执行上下文被压入执行上下文栈"><a href="#5-执行-f-函数，创建-f-函数执行上下文，f-函数执行上下文被压入执行上下文栈" class="headerlink" title="5.执行 f 函数，创建 f 函数执行上下文，f 函数执行上下文被压入执行上下文栈"></a>5.执行 f 函数，创建 f 函数执行上下文，f 函数执行上下文被压入执行上下文栈</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    fContext,</span><br><span class="line">    checkScopeContext,</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-f-函数执行上下文初始化-以下跟第-4-步相同"><a href="#6-f-函数执行上下文初始化-以下跟第-4-步相同" class="headerlink" title="6.f 函数执行上下文初始化, 以下跟第 4 步相同"></a>6.f 函数执行上下文初始化, 以下跟第 4 步相同</h4><ol>
+<li>复制函数 [[scope]] 属性创建作用域链</li>
+<li>用 arguments 创建活动对象</li>
+<li>初始化活动对象，即加入形参、函数声明、变量声明</li>
+<li>将活动对象压入 f 作用域链顶端<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        <span class="built_in">arguments</span>: &#123;</span><br><span class="line">            length: <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [AO, checkScopeContext.AO, globalContext.VO],</span><br><span class="line">    <span class="built_in">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="7-f-函数执行，沿着作用域链查找-scope-值，返回-scope-值"><a href="#7-f-函数执行，沿着作用域链查找-scope-值，返回-scope-值" class="headerlink" title="7.f 函数执行，沿着作用域链查找 scope 值，返回 scope 值"></a>7.f 函数执行，沿着作用域链查找 scope 值，返回 scope 值</h4><h4 id="8-f-函数执行完毕，f-函数上下文从执行上下文栈中弹出"><a href="#8-f-函数执行完毕，f-函数上下文从执行上下文栈中弹出" class="headerlink" title="8.f 函数执行完毕，f 函数上下文从执行上下文栈中弹出"></a>8.f 函数执行完毕，f 函数上下文从执行上下文栈中弹出</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    checkScopeContext,</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-checkScope-函数执行完毕，checkScope-执行上下文从执行上下文栈中弹出"><a href="#9-checkScope-函数执行完毕，checkScope-执行上下文从执行上下文栈中弹出" class="headerlink" title="9.checkScope 函数执行完毕，checkScope 执行上下文从执行上下文栈中弹出"></a>9.checkScope 函数执行完毕，checkScope 执行上下文从执行上下文栈中弹出</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二段代码执行分析"><a href="#第二段代码执行分析" class="headerlink" title="第二段代码执行分析"></a>第二段代码执行分析</h3><h4 id="1-执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈，并初始化全局上下文"><a href="#1-执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈，并初始化全局上下文" class="headerlink" title="1.执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈，并初始化全局上下文"></a>1.执行全局代码，创建全局执行上下文，全局上下文被压入执行上下文栈，并初始化全局上下文</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [globalContext];</span><br><span class="line">globalContext = &#123;</span><br><span class="line">  VO: [<span class="built_in">global</span>],</span><br><span class="line">  Scope: [globalContext.VO],</span><br><span class="line">  <span class="built_in">this</span>: globalContext.VO</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>初始化的同时，checkScope 函数被创建，保存作用域链到函数的内部属性[[scope]]：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">checkScope.[[scope]] = [globalContext.VO];</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-执行-checkScope-函数，创建-checkScope-函数执行上下文，checkScope-函数执行上下文被压入执行上下文栈，并初始化函数上下文"><a href="#2-执行-checkScope-函数，创建-checkScope-函数执行上下文，checkScope-函数执行上下文被压入执行上下文栈，并初始化函数上下文" class="headerlink" title="2.执行 checkScope 函数，创建 checkScope 函数执行上下文，checkScope 函数执行上下文被压入执行上下文栈，并初始化函数上下文"></a>2.执行 checkScope 函数，创建 checkScope 函数执行上下文，checkScope 函数执行上下文被压入执行上下文栈，并初始化函数上下文</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [checkscopeContext, globalContext];</span><br><span class="line">checkscopeContext = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">      length: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    scope: <span class="literal">undefined</span>,</span><br><span class="line">    f: reference to <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  Scope: [AO, globalContext.VO],</span><br><span class="line">  <span class="built_in">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时 f 函数被创建，保存作用域链到 f 函数的内部属性[[scope]]：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.[[scope]] = [AO, checkscopeContext.AO, globalContext.VO];</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-checkScope-函数执行完毕，checkScope-执行上下文从执行上下文栈中弹出"><a href="#3-checkScope-函数执行完毕，checkScope-执行上下文从执行上下文栈中弹出" class="headerlink" title="3.checkScope 函数执行完毕，checkScope 执行上下文从执行上下文栈中弹出"></a>3.checkScope 函数执行完毕，checkScope 执行上下文从执行上下文栈中弹出</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [globalContext];</span><br></pre></td></tr></table></figure>
+<h4 id="4-执行-f-函数，创建-f-函数执行上下文，并压入执行上下文栈，将其初始化"><a href="#4-执行-f-函数，创建-f-函数执行上下文，并压入执行上下文栈，将其初始化" class="headerlink" title="4.执行 f 函数，创建 f 函数执行上下文，并压入执行上下文栈，将其初始化"></a>4.执行 f 函数，创建 f 函数执行上下文，并压入执行上下文栈，将其初始化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [fContext, globalContext];</span><br><span class="line">fContext = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">      length: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  Scope: [AO, checkscopeContext.AO, globalContext.VO],</span><br><span class="line">  <span class="built_in">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-f-函数执行，沿着作用域链查找-scope-值，返回-scope-值。正是因为-checkScope-函数执行上下文初始化时，f-函数同时被创建，保存作用域链到-f-函数的内部属性-scope-，所以即使checkScope函数执行完毕，被弹出执行上下文栈，但是checkScope-Context-AO-依然存在于-f-函数维护的-scope-："><a href="#5-f-函数执行，沿着作用域链查找-scope-值，返回-scope-值。正是因为-checkScope-函数执行上下文初始化时，f-函数同时被创建，保存作用域链到-f-函数的内部属性-scope-，所以即使checkScope函数执行完毕，被弹出执行上下文栈，但是checkScope-Context-AO-依然存在于-f-函数维护的-scope-：" class="headerlink" title="5.f 函数执行，沿着作用域链查找 scope 值，返回 scope 值。正是因为 checkScope 函数执行上下文初始化时，f 函数同时被创建，保存作用域链到 f 函数的内部属性[[scope]]，所以即使checkScope函数执行完毕，被弹出执行上下文栈，但是checkScope Context.AO 依然存在于 f 函数维护的[scope]]："></a>5.f 函数执行，沿着作用域链查找 scope 值，返回 scope 值。正是因为 checkScope 函数执行上下文初始化时，f 函数同时被创建，保存作用域链到 f 函数的内部属性[[scope]]，所以即使checkScope函数执行完毕，被弹出执行上下文栈，但是checkScope Context.AO 依然存在于 f 函数维护的[scope]]：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fContext = &#123;</span><br><span class="line">    Scope: [AO, checkscopeContext.AO, globalContext.VO],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-f-函数执行完毕，f-函数上下文从执行上下文栈中弹出"><a href="#6-f-函数执行完毕，f-函数上下文从执行上下文栈中弹出" class="headerlink" title="6.f 函数执行完毕，f 函数上下文从执行上下文栈中弹出"></a>6.f 函数执行完毕，f 函数上下文从执行上下文栈中弹出</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [globalContext];</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/07/19/Javascript%20%E9%97%AD%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -5700,152 +5888,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/04/06/Nginx%20gzip_static%E9%85%8D%E7%BD%AEgzip%E4%B8%8Esend_file%E5%85%B1%E5%AD%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/04/06/Nginx%20gzip_static%E9%85%8D%E7%BD%AEgzip%E4%B8%8Esend_file%E5%85%B1%E5%AD%98/" itemprop="url">Nginx gzip_static配置gzip与send_file共存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-06T10:24:10+08:00">
-                2022-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="gzip-static指令"><a href="#gzip-static指令" class="headerlink" title="gzip_static指令"></a>gzip_static指令</h3><h5 id="tip-gzip-static-指令需要添加-nginx-http-gzip-static-module-模块到-Nginx，才能生效"><a href="#tip-gzip-static-指令需要添加-nginx-http-gzip-static-module-模块到-Nginx，才能生效" class="headerlink" title="!!!tip: gzip_static 指令需要添加 nginx_http_gzip_static_module 模块到 Nginx，才能生效"></a>!!!tip: gzip_static 指令需要添加 nginx_http_gzip_static_module 模块到 Nginx，才能生效</h5><p>gzip_static: 如果能检索到与请求资源同名的.gz文件，在response中以gzip相关的header返回.gz文件的内容。</p>
-<ol>
-<li>语法：gzip_static on | off | always (always表示无视客户端浏览器是否支持，强制启用gzip；on则会进行对浏览器支持进行判断)</li>
-<li>所属块：http server location</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -5900,7 +5942,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
