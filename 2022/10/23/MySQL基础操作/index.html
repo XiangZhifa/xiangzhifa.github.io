@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="listen指令 语法：listen address:port || listen port 默认值：listen *:80 所属块：server  default_server属性 语法：listen address:port default_server 作用：在Nginx无法匹配到结果时，或默认应用default_server属性  案例123listen localhost:8080; #">
+<meta name="description" content="查询所有数据库1show databases; 建库1create schema &amp;#x27;my_blog&amp;#x27;;  查询库中表1show tables;  向表中插入数据1insert into users(username,&#96;password&#96;,realname) values (&amp;#x27;zhangsan&amp;#x27;,&amp;#x27;123&amp;#x27;,&amp;#x27;张三&amp;#x27;);">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx listen指令配置">
-<meta property="og:url" content="https://xiangzhifa.github.io/2022/03/23/Nginx%20listen%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="MySQL基础操作">
+<meta property="og:url" content="https://xiangzhifa.github.io/2022/10/23/MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Jeffery&#39;s Blog">
-<meta property="og:description" content="listen指令 语法：listen address:port || listen port 默认值：listen *:80 所属块：server  default_server属性 语法：listen address:port default_server 作用：在Nginx无法匹配到结果时，或默认应用default_server属性  案例123listen localhost:8080; #">
+<meta property="og:description" content="查询所有数据库1show databases; 建库1create schema &amp;#x27;my_blog&amp;#x27;;  查询库中表1show tables;  向表中插入数据1insert into users(username,&#96;password&#96;,realname) values (&amp;#x27;zhangsan&amp;#x27;,&amp;#x27;123&amp;#x27;,&amp;#x27;张三&amp;#x27;);">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-03-23T05:56:38.461Z">
-<meta property="article:modified_time" content="2022-03-23T11:01:46.474Z">
+<meta property="article:published_time" content="2022-10-23T10:09:56.093Z">
+<meta property="article:modified_time" content="2022-10-24T14:05:51.517Z">
 <meta property="article:author" content="Jeffery Xiang">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://xiangzhifa.github.io/2022/03/23/Nginx listen指令配置/"/>
+  <link rel="canonical" href="https://xiangzhifa.github.io/2022/10/23/MySQL基础操作/"/>
 
 
 
 
 
-  <title>Nginx listen指令配置 | Jeffery's Blog</title>
+  <title>MySQL基础操作 | Jeffery's Blog</title>
   
 
 
@@ -242,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20listen%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/10/23/MySQL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -259,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nginx listen指令配置</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL基础操作</h1>
         
 
         <div class="post-meta">
@@ -271,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T13:56:38+08:00">
-                2022-03-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-23T18:09:56+08:00">
+                2022-10-23
               </time>
             
 
@@ -294,8 +294,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
                   </a>
                 </span>
 
@@ -331,17 +331,20 @@
       
 
       
-        <h3 id="listen指令"><a href="#listen指令" class="headerlink" title="listen指令"></a>listen指令</h3><ol>
-<li>语法：listen address:port || listen port</li>
-<li>默认值：listen *:80</li>
-<li>所属块：server</li>
-</ol>
-<h3 id="default-server属性"><a href="#default-server属性" class="headerlink" title="default_server属性"></a>default_server属性</h3><ol>
-<li>语法：listen address:port default_server</li>
-<li>作用：在Nginx无法匹配到结果时，或默认应用default_server属性</li>
-</ol>
-<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">listen localhost:8080; # 监听指定IP下的指定端口</span><br><span class="line">listen localhost; # 监听指定IP下的所有端口</span><br><span class="line">listen 8000; # 监听指定端口</span><br></pre></td></tr></table></figure>
+        <h2 id="查询所有数据库"><a href="#查询所有数据库" class="headerlink" title="查询所有数据库"></a>查询所有数据库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+<h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create schema &#x27;my_blog&#x27;;</span><br></pre></td></tr></table></figure>
 
+<h2 id="查询库中表"><a href="#查询库中表" class="headerlink" title="查询库中表"></a>查询库中表</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show tables;</span><br></pre></td></tr></table></figure>
+
+<h2 id="向表中插入数据"><a href="#向表中插入数据" class="headerlink" title="向表中插入数据"></a>向表中插入数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into users(username,`password`,realname) values (&#x27;zhangsan&#x27;,&#x27;123&#x27;,&#x27;张三&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询表中数据"><a href="#查询表中数据" class="headerlink" title="查询表中数据"></a>查询表中数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">select * from users;</span><br><span class="line"></span><br><span class="line">select id,username from users;</span><br><span class="line"></span><br><span class="line">select * from users where username=&#x27;zhangsan&#x27; and `password`=&#x27;123&#x27;;</span><br><span class="line"></span><br><span class="line">select * from users where username=&#x27;zhangsan&#x27; or `password`=&#x27;123&#x27;;</span><br><span class="line"></span><br><span class="line">-- 查询 username 字段含 zhang 字符的数据</span><br><span class="line">select * from users where username like &#x27;%zhang%&#x27;;</span><br><span class="line"></span><br><span class="line">-- 正序排序</span><br><span class="line">select * from users where username like &#x27;%zhang%&#x27; order by id;</span><br><span class="line">-- 倒叙排序</span><br><span class="line">select * from users where username like &#x27;%zhang%&#x27; order by id desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新表中数据"><a href="#更新表中数据" class="headerlink" title="更新表中数据"></a>更新表中数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update users set realname=&#x27;张三2&#x27; where username=&#x27;zhangsan&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除表中数据-硬删除"><a href="#删除表中数据-硬删除" class="headerlink" title="删除表中数据 (硬删除)"></a>删除表中数据 (硬删除)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from users where username=&#x27;zhangsan&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="根据标记过滤表中数据-软删除"><a href="#根据标记过滤表中数据-软删除" class="headerlink" title="根据标记过滤表中数据 (软删除)"></a>根据标记过滤表中数据 (软删除)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">update users set account_state=&#x27;0&#x27; where username=&#x27;zhangsan&#x27;;</span><br><span class="line"></span><br><span class="line">-- 查询users表中 account_state 为 1 的数据</span><br><span class="line">select * from users where account_state=&#x27;1&#x27;</span><br><span class="line"></span><br><span class="line">-- 查询users表中 account_state 不等于 1 的数据</span><br><span class="line">select * from users where account_state&lt;&gt;&#x27;1&#x27;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -365,8 +368,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/03/23/Nginx%20%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B/" rel="next" title="Nginx 基础配置实例">
-                <i class="fa fa-chevron-left"></i> Nginx 基础配置实例
+              <a href="/2022/07/21/JavaScript%20%E9%98%B2%E6%8A%96/" rel="next" title="JavaScript 防抖">
+                <i class="fa fa-chevron-left"></i> JavaScript 防抖
               </a>
             
           </div>
@@ -374,10 +377,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2022/03/23/Nginx%20server_name%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/" rel="prev" title="Nginx server_name指令配置">
-                Nginx server_name指令配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -504,7 +503,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#listen%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">listen指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#default-server%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">default_server属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">查询所有数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%BA%93%E4%B8%AD%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">查询库中表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">向表中插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE"><span class="nav-number">5.</span> <span class="nav-text">查询表中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE"><span class="nav-number">6.</span> <span class="nav-text">更新表中数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE-%E7%A1%AC%E5%88%A0%E9%99%A4"><span class="nav-number">7.</span> <span class="nav-text">删除表中数据 (硬删除)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%A0%87%E8%AE%B0%E8%BF%87%E6%BB%A4%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE-%E8%BD%AF%E5%88%A0%E9%99%A4"><span class="nav-number">8.</span> <span class="nav-text">根据标记过滤表中数据 (软删除)</span></a></li></ol></div>
             
 
           </div>
