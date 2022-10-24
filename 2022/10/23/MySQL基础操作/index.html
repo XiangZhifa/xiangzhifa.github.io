@@ -87,7 +87,7 @@
 <meta property="og:description" content="查询所有数据库1show databases; 建库1create schema &amp;#x27;my_blog&amp;#x27;;  查询库中表1show tables;  向表中插入数据1insert into users(username,&#96;password&#96;,realname) values (&amp;#x27;zhangsan&amp;#x27;,&amp;#x27;123&amp;#x27;,&amp;#x27;张三&amp;#x27;);">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-10-23T10:09:56.093Z">
-<meta property="article:modified_time" content="2022-10-24T14:05:51.517Z">
+<meta property="article:modified_time" content="2022-10-24T15:52:21.051Z">
 <meta property="article:author" content="Jeffery Xiang">
 <meta name="twitter:card" content="summary">
 
@@ -340,7 +340,7 @@
 
 <h2 id="查询表中数据"><a href="#查询表中数据" class="headerlink" title="查询表中数据"></a>查询表中数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">select * from users;</span><br><span class="line"></span><br><span class="line">select id,username from users;</span><br><span class="line"></span><br><span class="line">select * from users where username=&#x27;zhangsan&#x27; and `password`=&#x27;123&#x27;;</span><br><span class="line"></span><br><span class="line">select * from users where username=&#x27;zhangsan&#x27; or `password`=&#x27;123&#x27;;</span><br><span class="line"></span><br><span class="line">-- 查询 username 字段含 zhang 字符的数据</span><br><span class="line">select * from users where username like &#x27;%zhang%&#x27;;</span><br><span class="line"></span><br><span class="line">-- 正序排序</span><br><span class="line">select * from users where username like &#x27;%zhang%&#x27; order by id;</span><br><span class="line">-- 倒叙排序</span><br><span class="line">select * from users where username like &#x27;%zhang%&#x27; order by id desc;</span><br></pre></td></tr></table></figure>
 
-<h2 id="更新表中数据"><a href="#更新表中数据" class="headerlink" title="更新表中数据"></a>更新表中数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update users set realname=&#x27;张三2&#x27; where username=&#x27;zhangsan&#x27;;</span><br></pre></td></tr></table></figure>
+<h2 id="更新表中数据"><a href="#更新表中数据" class="headerlink" title="更新表中数据"></a>更新表中数据</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update users set realname=&#x27;张三2&#x27; , password=&#x27;123&#x27; where username=&#x27;zhangsan&#x27;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="删除表中数据-硬删除"><a href="#删除表中数据-硬删除" class="headerlink" title="删除表中数据 (硬删除)"></a>删除表中数据 (硬删除)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from users where username=&#x27;zhangsan&#x27;;</span><br></pre></td></tr></table></figure>
 
