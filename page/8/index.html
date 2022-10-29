@@ -239,6 +239,309 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/05/TsDecorator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/05/TsDecorator/" itemprop="url">TypeScript中的装饰器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-05T23:41:55+08:00">
+                2021-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通装饰器(无法传参)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">httpLog</span>(<span class="params">target:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(target)</span><br><span class="line">  <span class="comment">//target 就是当前类,所以可以在类装饰器中扩展当前类的属性和方法</span></span><br><span class="line">  target.prototype.apiUrl = <span class="string">&#x27;http://localhost:4000&#x27;</span></span><br><span class="line">  target.prototype.run = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;running&#x27;</span>)</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@httpLog</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> http:<span class="built_in">any</span> = <span class="keyword">new</span> HttpClient()</span><br><span class="line"><span class="built_in">console</span>.log(http.apiUrl)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//装饰器工厂(可以传参)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">httpLog</span>(<span class="params">params:<span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//params 是 传入的参数 </span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//target 是 当前类</span></span><br><span class="line">    <span class="built_in">console</span>.log(target)</span><br><span class="line">    <span class="built_in">console</span>.log(params)</span><br><span class="line">    target.prototype.apiUrl = params</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@httpLog</span>(<span class="string">&#x27;http://localhost:4000&#x27;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> http:<span class="built_in">any</span> = <span class="keyword">new</span> HttpClient()</span><br><span class="line"><span class="built_in">console</span>.log(http.apiUrl)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类装饰器 重载 类的构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">httpLog</span>(<span class="params">target:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(target)</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">target</span> </span>&#123;</span><br><span class="line">    apiUrl:<span class="built_in">string</span> = <span class="string">&#x27;我是装饰器修改后的apiUrl&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@httpLog</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> apiUrl:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.apiUrl = <span class="string">&#x27;我是构造函数中的apiUrl&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="title">getData</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.apiUrl)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.apiUrl</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> http = <span class="keyword">new</span> HttpClient()</span><br><span class="line">http.getData()</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性装饰器"><a href="#属性装饰器" class="headerlink" title="属性装饰器"></a>属性装饰器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">httpProperty</span>(<span class="params">params:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target:<span class="built_in">any</span>,attr:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//属性装饰器接收两个参数，target当前类，attr属性名称</span></span><br><span class="line">    <span class="built_in">console</span>.log(target)</span><br><span class="line">    <span class="built_in">console</span>.log(attr)</span><br><span class="line">    <span class="comment">//装饰器中直接修改属性值</span></span><br><span class="line">    target[attr] = params</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">  <span class="meta">@httpProperty</span>(<span class="string">&#x27;http://localhost:4000&#x27;</span>)</span><br><span class="line">  url:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> http:<span class="built_in">any</span> = <span class="keyword">new</span> HttpClient()</span><br><span class="line"><span class="built_in">console</span>.log(http.apiUrl)</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法装饰器"><a href="#方法装饰器" class="headerlink" title="方法装饰器"></a>方法装饰器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">httpMethod</span>(<span class="params">params:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target:<span class="built_in">any</span>,name:<span class="built_in">any</span>,desc:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// target 是 当前类  name 是 方法名称  desc 是 方法描述</span></span><br><span class="line">    <span class="built_in">console</span>.log(target)</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">    <span class="built_in">console</span>.log(desc)</span><br><span class="line">    <span class="comment">// desc.value 是 当前方法</span></span><br><span class="line">    <span class="built_in">console</span>.log(desc.value)</span><br><span class="line">    <span class="comment">// 方法装饰器 修改 当前方法  把方法传入的所有参数修改为string类型</span></span><br><span class="line">    <span class="comment">//1.保存当前方法</span></span><br><span class="line">    <span class="keyword">const</span> originMethod = desc.value</span><br><span class="line">    <span class="comment">//2.修改参数类型</span></span><br><span class="line">    desc.value = <span class="function"><span class="keyword">function</span>(<span class="params">...params:<span class="built_in">any</span>[]</span>) </span>&#123;</span><br><span class="line">      params = params.map(<span class="function"><span class="params">item</span>=&gt;</span><span class="built_in">String</span>(item))</span><br><span class="line">      <span class="built_in">console</span>.log(params)</span><br><span class="line">      originMethod.apply(<span class="built_in">this</span>,params)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> apiUrl:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.apiUrl = <span class="string">&#x27;我是构造函数中的apiUrl&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="meta">@httpMethod</span>(<span class="string">&#x27;http://localhost:4000&#x27;</span>)</span><br><span class="line">  <span class="function"><span class="title">getData</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我是getData中的方法&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.apiUrl</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法参数装饰器"><a href="#方法参数装饰器" class="headerlink" title="方法参数装饰器"></a>方法参数装饰器</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">httpParams</span>(<span class="params">param:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target:<span class="built_in">any</span>,methodName:<span class="built_in">any</span>,paramIndex:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// target 是 原型对象</span></span><br><span class="line">    <span class="built_in">console</span>.log(target)</span><br><span class="line">    <span class="comment">// paramName 是 方法名称</span></span><br><span class="line">    <span class="built_in">console</span>.log(methodName)</span><br><span class="line">    <span class="comment">// paramIndex 是 参数索引</span></span><br><span class="line">    <span class="built_in">console</span>.log(paramIndex)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> apiUrl:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.apiUrl = <span class="string">&#x27;我是构造函数中的apiUrl&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="title">getData</span>(<span class="params"><span class="meta">@httpParams</span>(<span class="string">&#x27;uid&#x27;</span>)uid:<span class="built_in">any</span></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;我是getData中的方法&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.apiUrl</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="装饰器的执行顺序"><a href="#装饰器的执行顺序" class="headerlink" title="装饰器的执行顺序"></a>装饰器的执行顺序</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1.不同类型装饰器的执行顺序</span></span><br><span class="line"><span class="comment">属性装饰器 -&gt; 方法装饰器 -&gt; 方法参数装饰器 -&gt; 类装饰器</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2.同类型装饰器执行顺序</span></span><br><span class="line"><span class="comment">从后向前</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/05/TsGener/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/05/TsGener/" itemprop="url">TypeScript中的泛型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-05T23:23:35+08:00">
+                2021-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="泛型的应用"><a href="#泛型的应用" class="headerlink" title="泛型的应用"></a>泛型的应用</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只能返回string类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">params:<span class="built_in">string</span></span>):<span class="title">string</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> params</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回string类型 或者 number类型</span></span><br><span class="line"><span class="comment">//可以用泛型解决</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>&lt;<span class="title">T</span>&gt;(<span class="params">params:T</span>):<span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> params</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用时传入泛型</span></span><br><span class="line">getData&lt;<span class="built_in">number</span>&gt;(<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinClass</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> list:T[] = []</span><br><span class="line"></span><br><span class="line">  add(num:T):<span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.list.push(num)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  min():T &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.list.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)[<span class="number">0</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实例化类，并指定 类的泛型 代表的类型是 number</span></span><br><span class="line"><span class="keyword">let</span> m1 = <span class="keyword">new</span> MinClass&lt;<span class="built_in">number</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> ConfigOption&lt;T&gt; &#123;</span><br><span class="line">  (value1:T,<span class="attr">value2</span>:T):T</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>&lt;<span class="title">T</span>&gt;(<span class="params">value1:T,value2:T</span>):<span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value1 + value2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="将类作为泛型参数"><a href="#将类作为泛型参数" class="headerlink" title="将类作为泛型参数"></a>将类作为泛型参数</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">  userName:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  passWord:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MysqlDb</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  add(param:T):<span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(param)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> user = <span class="keyword">new</span> User()</span><br><span class="line">user.userName = <span class="string">&#x27;张三&#x27;</span></span><br><span class="line">user.passWord = <span class="string">&#x27;123456&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> DB = <span class="keyword">new</span> MysqlDb&lt;User&gt;()</span><br><span class="line">DB.add(user)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArticleCate</span> </span>&#123;</span><br><span class="line">  title:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  desc:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  status:<span class="built_in">number</span>|<span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> article = <span class="keyword">new</span> ArticleCate()</span><br><span class="line">article.title = <span class="string">&#x27;国内新闻&#x27;</span></span><br><span class="line">article.desc = <span class="string">&#x27;国内新闻详情&#x27;</span></span><br><span class="line">article.status = <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> DB2 = <span class="keyword">new</span> MysqlDb&lt;ArticleCate&gt;()</span><br><span class="line">DB2.add(article)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型综合应用-封装数据库api"><a href="#泛型综合应用-封装数据库api" class="headerlink" title="泛型综合应用(封装数据库api)"></a>泛型综合应用(封装数据库api)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义数据库操作接口</span></span><br><span class="line"><span class="keyword">interface</span> DBI&lt;T&gt; &#123;</span><br><span class="line">  add(info:T):<span class="built_in">boolean</span></span><br><span class="line">  <span class="keyword">delete</span>(id:<span class="built_in">number</span>):<span class="built_in">boolean</span></span><br><span class="line">  update(info:T,<span class="attr">id</span>:<span class="built_in">number</span>):<span class="built_in">boolean</span></span><br><span class="line">  get(id:<span class="built_in">number</span>):<span class="built_in">any</span>[]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义操作Mysql数据库的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MysqlDb</span>&lt;<span class="title">T</span>&gt; <span class="title">implements</span> <span class="title">DBI</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  add(info:T):<span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(info)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">delete</span>(id:<span class="built_in">number</span>):<span class="built_in">boolean</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(id)</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   update(info:T,<span class="attr">id</span>:<span class="built_in">number</span>):<span class="built_in">boolean</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(info)</span><br><span class="line">     <span class="built_in">console</span>.log(id)</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   get(id:<span class="built_in">number</span>):<span class="built_in">any</span>[] &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(id)</span><br><span class="line">     <span class="keyword">return</span> []</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">  userName:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">  passWord:<span class="built_in">string</span>|<span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> user = <span class="keyword">new</span> User()</span><br><span class="line">user.userName = <span class="string">&#x27;张三&#x27;</span></span><br><span class="line">user.passWord = <span class="string">&#x27;123456&#x27;</span></span><br><span class="line"><span class="keyword">const</span> DB = <span class="keyword">new</span> MysqlDb&lt;User&gt;()</span><br><span class="line">DB.add(user)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/03/31/TsInterface/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1073,7 +1376,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1084,7 +1387,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -239,6 +239,319 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20location%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/23/Nginx%20location%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx location指令配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T16:07:34+08:00">
+                2022-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="location指令"><a href="#location指令" class="headerlink" title="location指令"></a>location指令</h3><ol>
+<li>语法：location [ = 、~ 、 ~* 、 ^~ 、 @]url (共六种匹配方式)</li>
+<li>所属块：server , location</li>
+</ol>
+<h3 id="location-无符号-匹配"><a href="#location-无符号-匹配" class="headerlink" title="location 无符号 匹配"></a>location 无符号 匹配</h3><p>无符号：宽泛匹配，例如 /test123 依然能够访问 /test</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /test &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="location-匹配"><a href="#location-匹配" class="headerlink" title="location = 匹配"></a>location = 匹配</h3><p>=：精确匹配，用于不含正则表达式的url前，例如 必须是/test 才能访问 /test</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location =/test &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="location-和-匹配"><a href="#location-和-匹配" class="headerlink" title="location ~ 和 ~* 匹配"></a>location ~ 和 ~* 匹配</h3><p>~：表示url中包含正则表达式，且区分大小写</p>
+<p>~*：表示url中包含正则表达式，且不区分大小写</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ~匹配，区分大小写</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 该正则含义：/<span class="built_in">test</span>后，必须再跟上任意字符/数字/下划线均可</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 例如：/<span class="built_in">test</span>返回404，/test_可以正常访问</span></span><br><span class="line">location ~^/test\w$ &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ~*匹配，不区分大小写，例如：/TEst_依然可以访问</span></span><br><span class="line">location ~*^/test\w$ &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="匹配"><a href="#匹配" class="headerlink" title="^~匹配"></a>^~匹配</h3><p>^~：用于不含正则表达式的url前，效果与无符号一致，唯一不同的是，如果当前模式匹配，会停止继续向后搜索其他模式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location ^~/test &#123;</span><br><span class="line">  default_type text/plain</span><br><span class="line">  return 200 &quot;test ^~ success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20server_name%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/03/23/Nginx%20server_name%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/" itemprop="url">Nginx server_name指令配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-23T14:14:37+08:00">
+                2022-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="server-name指令"><a href="#server-name指令" class="headerlink" title="server_name指令"></a>server_name指令</h3><ol>
+<li>语法：server_name name1 name2 …; (name的值可以是IP或域名，配置多个name用空格符隔开即可)</li>
+<li>默认值：server_name “”;</li>
+<li>所属块：server</li>
+</ol>
+<h3 id="server-name精确匹配"><a href="#server-name精确匹配" class="headerlink" title="server_name精确匹配"></a>server_name精确匹配</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 配置本地域名 C:\Windows\System32\drivers\etc目录下，hosts文件中，配置域名和IP的对应关系</span></span><br><span class="line">server_name 127.0.0.1 www.jeffreyxiang.cn;</span><br></pre></td></tr></table></figure>
+
+<h3 id="server-name通配符匹配"><a href="#server-name通配符匹配" class="headerlink" title="server_name通配符匹配"></a>server_name通配符匹配</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> server_name支持通配符配置，但是只能放在域名的首部或尾部！！！不能放在域名的中间！！！</span></span><br><span class="line">server_name *.jeffreyxiang.cn www.jeffreyxiang.*;</span><br></pre></td></tr></table></figure>
+
+<h3 id="server-name正则表达式匹配"><a href="#server-name正则表达式匹配" class="headerlink" title="server_name正则表达式匹配"></a>server_name正则表达式匹配</h3><p>sever_name可以使用正则表达式，但是需要使用 ~ 作为正则表达式开始的标记</p>
+<h4 id="正则表达式匹配语法"><a href="#正则表达式匹配语法" class="headerlink" title="正则表达式匹配语法"></a>正则表达式匹配语法</h4><p><img src="/images/Nginx/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.jpg"></p>
+<h4 id="server-name正则匹配案例"><a href="#server-name正则匹配案例" class="headerlink" title="server_name正则匹配案例"></a>server_name正则匹配案例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server_name ~^www\.(\w+)\.com$</span><br></pre></td></tr></table></figure>
+
+<h3 id="server-name匹配执行顺序"><a href="#server-name匹配执行顺序" class="headerlink" title="server_name匹配执行顺序"></a>server_name匹配执行顺序</h3><p>精确匹配 &gt; 首部通配符匹配 &gt; 尾部通配符匹配 &gt; 正则匹配 &gt; default_server</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/23/Nginx%20listen%E6%8C%87%E4%BB%A4%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1501,299 +1814,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/12/Nginx%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/12/Nginx%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" itemprop="url">Nginx 配置文件结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-12T16:06:48+08:00">
-                2022-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="nginx-conf文件结构"><a href="#nginx-conf文件结构" class="headerlink" title="nginx.conf文件结构"></a>nginx.conf文件结构</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    # 配置监听的端口 80</span><br><span class="line">    listen	 80;</span><br><span class="line">    # 配置监听的IP地址 localhost</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2022/03/12/Nginx%20%E6%9C%8D%E5%8A%A1%E6%8E%A7%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jeffery's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/03/12/Nginx%20%E6%9C%8D%E5%8A%A1%E6%8E%A7%E5%88%B6/" itemprop="url">Nginx 服务控制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-12T14:42:42+08:00">
-                2022-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">Nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="查看Nginx相关进程"><a href="#查看Nginx相关进程" class="headerlink" title="查看Nginx相关进程"></a>查看Nginx相关进程</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep nginx</span><br></pre></td></tr></table></figure>
-
-<h3 id="通过信号实现Nginx服务启停"><a href="#通过信号实现Nginx服务启停" class="headerlink" title="通过信号实现Nginx服务启停"></a>通过信号实现Nginx服务启停</h3><p><img src="/images/Nginx/Nginx%E4%BF%A1%E5%8F%B7.png"></p>
-<h5 id="tips"><a href="#tips" class="headerlink" title="!tips"></a>!tips</h5><p>TERM: 立即强制关闭所有nginx服务，不会处理已经接收的请求<br>QUIT: 优雅关闭，会处理完已接收的请求，再关闭所有nginx服务<br>WINCH: 优雅关闭子进程，相当于对WORKER进程发送QUIT命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> PID可以通过 ps -ef | grep nginx 获取</span></span><br><span class="line">kill -signal PID</span><br></pre></td></tr></table></figure>
-
-<h3 id="通过命令行实现Nginx服务控制"><a href="#通过命令行实现Nginx服务控制" class="headerlink" title="通过命令行实现Nginx服务控制"></a>通过命令行实现Nginx服务控制</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 仅查看版本号</span></span><br><span class="line">nginx -v </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看版本号和相关配置信息</span></span><br><span class="line">nginx -V</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试nginx配置文件是否正确(仅返回结果)</span></span><br><span class="line">nginx -t </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试nginx配置文件是否正确(返回结果和测试文件内容)</span></span><br><span class="line">nginx -T</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 仅输出错误信息,正确不输出信息</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (例如: nginx -tq)</span></span><br><span class="line">nginx -q</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 跟信号参数</span></span><br><span class="line">nginx -s signal</span><br><span class="line"><span class="meta">#</span><span class="bash"> signal可以是:</span> </span><br><span class="line"><span class="meta">#</span><span class="bash">   stop 强制关闭,类似于TERM/INT信号</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   quit 优雅关闭,类似于QUIT信号</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   reopen 重新打开配置文件,类似于USR1信号</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   reload 重读配置文件,使新的配置项生效,类似于HUP信号</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1848,7 +1868,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1859,7 +1879,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
