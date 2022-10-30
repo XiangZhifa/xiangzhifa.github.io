@@ -239,6 +239,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/06/JenkinsFreeStytle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/RonaldoAvatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/04/06/JenkinsFreeStytle/" itemprop="url">Jenkins前端自动化部署(自由风格项目)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-06T22:51:13+08:00">
+                2021-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jenkins/" itemprop="url" rel="index">
+                    <span itemprop="name">Jenkins</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><p>Jenkins新建项目 -&gt; 选择自由风格项目 -&gt; 输入项目名称</p>
+<p><img src="/images/Jenkins/Freestyle/new-project.png"></p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>配置项目源码地址（例如Github Url等）</p>
+<p><img src="/images/Jenkins/Freestyle/select-git.png"></p>
+<h3 id="选择构建触发器"><a href="#选择构建触发器" class="headerlink" title="选择构建触发器"></a>选择构建触发器</h3><p>勾选GitHub hook trigger for GITScm polling，在推送代码时触发自动构建</p>
+<p><img src="/images/Jenkins/Freestyle/select-trigger.png"></p>
+<h3 id="配置构建环境"><a href="#配置构建环境" class="headerlink" title="配置构建环境"></a>配置构建环境</h3><p>勾选Provide Node &amp; npm bin/ folder to PATH（选择node环境）</p>
+<p><img src="/images/Jenkins/Freestyle/select-node.png"></p>
+<h3 id="配置shell脚本"><a href="#配置shell脚本" class="headerlink" title="配置shell脚本"></a>配置shell脚本</h3><p><img src="/images/Jenkins/Freestyle/select-shell.png"></p>
+<p>打包项目，并将项目部署到 <strong>当前服务器</strong> 的 <strong>Tomcat</strong> 中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 首先删除上次打包生成的文件夹</span></span><br><span class="line">rm -rf /var/lib/jenkins/workspace/web-jenkins-example/dist</span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入项目目录</span></span><br><span class="line">cd /var/lib/jenkins/workspace/web-jenkins-example</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装npm包依赖</span></span><br><span class="line">npm install</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行打包命令</span></span><br><span class="line">npm run build</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打包完成后，进入dist目录</span></span><br><span class="line">cd /var/lib/jenkins/workspace/web-jenkins-example/dist</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将dist目录下的文件压缩成tar包</span></span><br><span class="line">tar -zcvf jenkins-example.tar.gz *</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> !!!以下是，将项目部署至**当前服务器**的**Tomcat**中的步骤，远程部署请勿添加！！！</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将tar包移动到Tomcat对应的目录下</span></span><br><span class="line">mv /var/lib/jenkins/workspace/web-jenkins-example/dist/jenkins-example.tar.gz /opt/tomcat/apache-tomcat-8.5.65/webapps/web-jenkins-example</span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入Tomcat目录</span></span><br><span class="line">cd /opt/tomcat/apache-tomcat-8.5.65/webapps/web-jenkins-example</span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压tar包</span></span><br><span class="line">tar -zxvf jenkins-example.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除tar包</span></span><br><span class="line">rm -rf jenkins-example.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="构建后步骤（远程部署）"><a href="#构建后步骤（远程部署）" class="headerlink" title="构建后步骤（远程部署）"></a>构建后步骤（远程部署）</h3><p>部署至 <strong>远程服务器</strong></p>
+<p><img src="/images/Jenkins/Freestyle/remote-server.png"></p>
+<p>远程执行Shell脚本如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/tomcat/webapps/web-jenkins-example</span><br><span class="line">echo &quot;&gt;&gt;&gt;删除：(jenkins-example.tar.gz)之外的文件&quot;</span><br><span class="line">rm -rf !(jenkins-example.tar.gz)</span><br><span class="line">echo &quot;&gt;&gt;&gt;解压：jenkins-example.tar.gz&quot;</span><br><span class="line">tar -zxvf jenkins-example.tar.gz -C ./</span><br><span class="line">echo &quot;&gt;&gt;&gt;移除：jenkins-example.tar.gz&quot;</span><br><span class="line">rm -rf jenkins-example.tar.gz</span><br><span class="line">echo &quot;&gt;&gt;&gt;执行成功&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiangzhifa.github.io/2021/04/05/TsDecorator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1376,7 +1542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1387,7 +1553,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
